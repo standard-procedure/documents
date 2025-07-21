@@ -57,7 +57,8 @@ Create a "container" - a record within your application that will hold this orde
 @order_form = OrderForm.create!
 expect(@order_form).to be_kind_of(Documents::Container)
 
-Documents::ElementBuilder.call(destination: @order_form)
+@configuration = YAML.load(File.read("order_form.yml"))
+@order_form.load_elements_from(@configuration)
 
 expect(@order_form.elements.first).to be_kind_of(Documents::Paragraph)
 expect(@order_form.elements.last).to be_kind_of(Documents::Form)
