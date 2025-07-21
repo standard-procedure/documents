@@ -1,0 +1,480 @@
+{
+  "title": "Site Induction Questionnaire - UK Construction Site",
+  "elements": [
+    {
+      "element": "paragraph",
+      "description": "Welcome and introduction",
+      "html": "<h1>Welcome to Our Construction Site</h1><p>This induction questionnaire must be completed by all contractors, sub-contractors, and visitors before commencing work on site. Please complete all sections accurately and honestly. This information is required for health and safety compliance under UK Construction (Design and Management) Regulations 2015.</p><p><strong>Important:</strong> You must not commence work until this induction has been completed and approved by the Site Manager.</p>"
+    },
+    {
+      "element": "form",
+      "description": "Site Information and Contact Details",
+      "section_type": "static",
+      "display_type": "form",
+      "fields": [
+        {
+          "name": "site_name",
+          "description": "Site Name/Project Name",
+          "field_type": "Documents::TextValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false,
+          "default_value": ""
+        },
+        {
+          "name": "site_address",
+          "description": "Site Address",
+          "field_type": "Documents::RichTextValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "site_manager_name",
+          "description": "Site Manager Name",
+          "field_type": "Documents::TextValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "site_manager_phone",
+          "description": "Site Manager Contact Number",
+          "field_type": "Documents::PhoneValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "induction_date",
+          "description": "Induction Date",
+          "field_type": "Documents::DateValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        }
+      ]
+    },
+    {
+      "element": "form",
+      "description": "Contractor Company Details",
+      "section_type": "static",
+      "display_type": "form",
+      "fields": [
+        {
+          "name": "company_name",
+          "description": "Company/Organisation Name",
+          "field_type": "Documents::TextValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "company_address",
+          "description": "Company Address",
+          "field_type": "Documents::RichTextValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "company_phone",
+          "description": "Company Phone Number",
+          "field_type": "Documents::PhoneValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "company_email",
+          "description": "Company Email Address",
+          "field_type": "Documents::EmailValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "insurance_certificate",
+          "description": "Public Liability Insurance Certificate",
+          "field_type": "Documents::FileValue",
+          "required": true,
+          "allow_comments": true,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "insurance_expiry",
+          "description": "Insurance Expiry Date",
+          "field_type": "Documents::DateValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        }
+      ]
+    },
+    {
+      "element": "form",
+      "description": "Worker Details",
+      "section_type": "static",
+      "display_type": "form",
+      "fields": [
+        {
+          "name": "worker_name",
+          "description": "Full Name",
+          "field_type": "Documents::TextValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "worker_dob",
+          "description": "Date of Birth",
+          "field_type": "Documents::DateValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "worker_address",
+          "description": "Home Address",
+          "field_type": "Documents::RichTextValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "worker_phone",
+          "description": "Mobile Phone Number",
+          "field_type": "Documents::PhoneValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "worker_email",
+          "description": "Email Address",
+          "field_type": "Documents::EmailValue",
+          "required": false,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "ni_number",
+          "description": "National Insurance Number",
+          "field_type": "Documents::TextValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "worker_role",
+          "description": "Role/Trade on Site",
+          "field_type": "Documents::SelectValue",
+          "required": true,
+          "allow_comments": true,
+          "allow_attachments": false,
+          "allow_tasks": false,
+          "options": {
+            "carpenter": "Carpenter",
+            "electrician": "Electrician",
+            "plumber": "Plumber",
+            "bricklayer": "Bricklayer",
+            "labourer": "General Labourer",
+            "plasterer": "Plasterer",
+            "roofer": "Roofer",
+            "painter": "Painter/Decorator",
+            "site_manager": "Site Manager",
+            "supervisor": "Supervisor",
+            "crane_operator": "Crane Operator",
+            "plant_operator": "Plant Operator",
+            "other": "Other (please specify in comments)"
+          }
+        }
+      ]
+    },
+    {
+      "element": "form",
+      "description": "Health Questionnaire",
+      "section_type": "static",
+      "display_type": "form",
+      "fields": [
+        {
+          "name": "medical_conditions",
+          "description": "Do you have any medical conditions that may affect your ability to work safely? (e.g., heart conditions, diabetes, epilepsy, breathing difficulties)",
+          "field_type": "Documents::SelectValue",
+          "required": true,
+          "allow_comments": true,
+          "allow_attachments": false,
+          "allow_tasks": false,
+          "options": {
+            "no": "No",
+            "yes": "Yes (please provide details in comments)"
+          }
+        },
+        {
+          "name": "medications",
+          "description": "Are you currently taking any medication that may affect your ability to work safely?",
+          "field_type": "Documents::SelectValue",
+          "required": true,
+          "allow_comments": true,
+          "allow_attachments": false,
+          "allow_tasks": false,
+          "options": {
+            "no": "No",
+            "yes": "Yes (please provide details in comments)"
+          }
+        },
+        {
+          "name": "allergies",
+          "description": "Do you have any allergies or sensitivities to materials commonly found on construction sites? (e.g., dust, chemicals, latex)",
+          "field_type": "Documents::SelectValue",
+          "required": true,
+          "allow_comments": true,
+          "allow_attachments": false,
+          "allow_tasks": false,
+          "options": {
+            "no": "No",
+            "yes": "Yes (please provide details in comments)"
+          }
+        },
+        {
+          "name": "injuries",
+          "description": "Do you have any current injuries or physical limitations that may affect your work?",
+          "field_type": "Documents::SelectValue",
+          "required": true,
+          "allow_comments": true,
+          "allow_attachments": false,
+          "allow_tasks": false,
+          "options": {
+            "no": "No",
+            "yes": "Yes (please provide details in comments)"
+          }
+        },
+        {
+          "name": "pregnant",
+          "description": "Are you currently pregnant or breastfeeding?",
+          "field_type": "Documents::SelectValue",
+          "required": true,
+          "allow_comments": true,
+          "allow_attachments": false,
+          "allow_tasks": false,
+          "options": {
+            "no": "No",
+            "yes": "Yes",
+            "prefer_not_to_say": "Prefer not to say"
+          }
+        }
+      ]
+    },
+    {
+      "element": "form",
+      "description": "Emergency Contact Information",
+      "section_type": "repeating",
+      "display_type": "table",
+      "fields": [
+        {
+          "name": "emergency_contact_name",
+          "description": "Emergency Contact Name",
+          "field_type": "Documents::TextValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "emergency_contact_relationship",
+          "description": "Relationship to Worker",
+          "field_type": "Documents::SelectValue",
+          "required": true,
+          "allow_comments": true,
+          "allow_attachments": false,
+          "allow_tasks": false,
+          "options": {
+            "spouse": "Spouse/Partner",
+            "parent": "Parent",
+            "child": "Child",
+            "sibling": "Sibling",
+            "friend": "Friend",
+            "other": "Other (please specify in comments)"
+          }
+        },
+        {
+          "name": "emergency_contact_phone",
+          "description": "Emergency Contact Phone Number",
+          "field_type": "Documents::PhoneValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "emergency_contact_alt_phone",
+          "description": "Alternative Contact Number",
+          "field_type": "Documents::PhoneValue",
+          "required": false,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        }
+      ]
+    },
+    {
+      "element": "form",
+      "description": "Qualifications and Certifications",
+      "section_type": "repeating",
+      "display_type": "table",
+      "fields": [
+        {
+          "name": "qualification_type",
+          "description": "Qualification/Certification Type",
+          "field_type": "Documents::SelectValue",
+          "required": true,
+          "allow_comments": true,
+          "allow_attachments": false,
+          "allow_tasks": false,
+          "options": {
+            "cscs": "CSCS Card",
+            "nvq": "NVQ",
+            "city_guilds": "City & Guilds",
+            "ipaf": "IPAF (Powered Access)",
+            "cpcs": "CPCS (Plant Operation)",
+            "first_aid": "First Aid Certificate",
+            "asbestos": "Asbestos Awareness",
+            "working_at_height": "Working at Height",
+            "manual_handling": "Manual Handling",
+            "confined_spaces": "Confined Spaces",
+            "other": "Other (please specify in comments)"
+          }
+        },
+        {
+          "name": "qualification_number",
+          "description": "Certificate/Card Number",
+          "field_type": "Documents::TextValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "qualification_expiry",
+          "description": "Expiry Date",
+          "field_type": "Documents::DateValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "qualification_file",
+          "description": "Upload Certificate/Card Copy",
+          "field_type": "Documents::FileValue",
+          "required": false,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        }
+      ]
+    },
+    {
+      "element": "paragraph",
+      "description": "Site Rules and Regulations",
+      "html": "<h2>Site Rules and Regulations</h2><p>By signing this induction form, you acknowledge that you have read, understood, and agree to comply with the following site rules:</p><ul><li>Hard hats, high-visibility clothing, and safety footwear must be worn at all times on site</li><li>No smoking except in designated areas</li><li>No alcohol or illegal substances permitted on site</li><li>All accidents and near misses must be reported immediately</li><li>Only authorised personnel may operate plant and machinery</li><li>All visitors must sign in and out</li><li>Site speed limit: 5mph</li><li>Mobile phones should not be used while operating machinery or in safety-critical areas</li><li>All tools and equipment must be in good working order</li><li>Personal Protective Equipment (PPE) must be worn as required</li></ul>"
+    },
+    {
+      "element": "form",
+      "description": "Acknowledgment and Signatures",
+      "section_type": "static",
+      "display_type": "form",
+      "fields": [
+        {
+          "name": "rules_acknowledgment",
+          "description": "I acknowledge that I have read and understood the site rules and regulations",
+          "field_type": "Documents::CheckboxValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "health_safety_acknowledgment",
+          "description": "I confirm that the health information I have provided is accurate and complete",
+          "field_type": "Documents::CheckboxValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "competency_acknowledgment",
+          "description": "I confirm that I am competent to carry out the work I have been assigned",
+          "field_type": "Documents::CheckboxValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "data_protection_consent",
+          "description": "I consent to my personal data being processed for health and safety purposes in accordance with GDPR",
+          "field_type": "Documents::CheckboxValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "worker_signature",
+          "description": "Worker Signature",
+          "field_type": "Documents::SignatureValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "signature_date",
+          "description": "Date Signed",
+          "field_type": "Documents::DateValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        },
+        {
+          "name": "site_manager_signature",
+          "description": "Site Manager Signature (Approval)",
+          "field_type": "Documents::SignatureValue",
+          "required": true,
+          "allow_comments": true,
+          "allow_attachments": false,
+          "allow_tasks": true
+        },
+        {
+          "name": "approval_date",
+          "description": "Approval Date",
+          "field_type": "Documents::DateValue",
+          "required": true,
+          "allow_comments": false,
+          "allow_attachments": false,
+          "allow_tasks": false
+        }
+      ]
+    }
+  ]
+}
