@@ -2,35 +2,42 @@ en:
   activerecord:
     errors:
       models:
-        documents/email_value:
-          attributes:
-            value:
-              invalid_email: "must be a valid email address"
-        documents/phone_value:
-          attributes:
-            value:
-              invalid_phone: "must be a valid phone number"
-        documents/url_value:
-          attributes:
-            value:
-              invalid_url: "must be a valid URL"
         documents/checkbox_value:
           attributes:
             value:
-              invalid_boolean: "must be true or false"
-        documents/signature_value:
-          attributes:
-            value:
-              required_signature: "Required signature"
-              invalid_signature: "Invalid signature"
+              invalid_boolean: must be true or false
         documents/data_value:
           attributes:
             value:
-              invalid_data_class: "Invalid data class"
-        documents/select_value:
+              invalid_data_class: Invalid data class
+        documents/email_value:
           attributes:
             value:
-              required: "Required"
-              invalid_option: "Invalid option"
+              invalid_email: must be a valid email address
+        documents/multi_select_value:
+          attributes:
             default_value:
-              invalid_default_option: "Invalid default option"
+              invalid_default_option: Invalid default option
+            value:
+              invalid_option: Invalid option
+              required: Required
+        documents/phone_value:
+          attributes:
+            value:
+              invalid_phone: must be a valid phone number
+        documents/select_value:
+          attributes:
+            default_value:
+              invalid_default_option: Invalid default option
+            value:
+              invalid_option: Invalid option
+              required: Required
+        documents/signature_value:
+          attributes:
+            value:
+              invalid_signature: Invalid signature
+              required_signature: Required signature
+        documents/url_value:
+          attributes:
+            value:
+              invalid_url: must be a valid URL
