@@ -16,7 +16,7 @@ elements:
         description: Date
         field_type: Documents::DateValue
         required: true
-        default_value: "Date.now" 
+        default_value: "today" 
   - element: form
     section_type: repeating
     display_type: table

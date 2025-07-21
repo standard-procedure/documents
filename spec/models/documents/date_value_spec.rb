@@ -57,6 +57,15 @@ module Documents
 
         expect(@date_field.value).to be_nil
       end
+
+      it "uses today's date when default_value is 'today'" do
+        @container = OrderForm.create!
+        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+        @section = @form.sections.first
+        @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "today"
+
+        expect(@date_field.value).to eq Date.current
+      end
     end
   end
 end

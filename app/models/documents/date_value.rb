@@ -5,7 +5,7 @@ module Documents
     validates :value, presence: true, on: :update, if: -> { required? }
 
     private def set_default_value
-      self.value = Date.parse(default_value)
+      self.value = (default_value == "today") ? Date.current : Date.parse(default_value)
     end
   end
 end
