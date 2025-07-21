@@ -15,7 +15,7 @@ elements:
   - element: paragraph
     html: <h1>Order Form</h1>
   - element: paragraph
-    html: <p>Place details of your order below
+    html: <p>Place details of your order below</p>
   - element: form
     section_type: static
     display_type: form
@@ -39,7 +39,7 @@ elements:
         required: true
       - name: quantity
         description: Quantity
-        field_type: "Documents::IntegerValue"
+        field_type: "Documents::NumberValue"
         required: true
         default_value: 1
   - element: form
@@ -56,7 +56,7 @@ elements:
         required: true
 ```
 
-Create a "container" - a record within your application that will hold this order form.  Then use the `Document::ElementBuilder` to add it: 
+Create a "container" - a record within your application that will hold this order form.  Then load your configuration to create the elements and form values.
 
 ```ruby
 @order_form = OrderForm.create!
@@ -103,7 +103,7 @@ bin/rails standard_procedure_documents:migrations:install db:migrate db:test:pre
 ```
 
 ## Contributing
-Contributions welcome
+Contributions welcome - but be nice.  
 
 ## License
 The gem is available as open source under the terms of the [LGPL License](/LICENCE).
