@@ -44,7 +44,7 @@ module Documents
         @container.load_elements_from(configuration)
         @form = @container.elements.where(type: "Documents::Form").first
 
-        expect(@form.field_template).to eq configuration["elements"][0]["fields"]
+        expect(@form.field_templates).to eq configuration["elements"][0]["fields"]
         expect(@form.sections.first.field_values.count).to eq 2
       end
     end
@@ -58,7 +58,7 @@ module Documents
               type: "Documents::Form",
               description: "Test Form",
               section_type: "repeating",
-              field_template: [
+              field_templates: [
                 {
                   "name" => "item",
                   "description" => "Item Name",
@@ -101,7 +101,7 @@ module Documents
               type: "Documents::Form",
               description: "Test Form",
               section_type: "repeating",
-              field_template: [{"name" => "test", "description" => "Test", "field_type" => "Documents::TextValue", "required" => false}]
+              field_templates: [{"name" => "test", "description" => "Test", "field_type" => "Documents::TextValue", "required" => false}]
             )
 
             @form.add_section
@@ -117,7 +117,7 @@ module Documents
               type: "Documents::Form",
               description: "Test Form",
               section_type: "repeating",
-              field_template: [{"name" => "test", "description" => "Test", "field_type" => "Documents::TextValue", "required" => false}]
+              field_templates: [{"name" => "test", "description" => "Test", "field_type" => "Documents::TextValue", "required" => false}]
             )
 
             result = @form.add_section
@@ -132,7 +132,7 @@ module Documents
               type: "Documents::Form",
               description: "Test Form",
               section_type: "repeating",
-              field_template: [
+              field_templates: [
                 {
                   "name" => "category",
                   "description" => "Category",
@@ -170,7 +170,7 @@ module Documents
               type: "Documents::Form",
               description: "Test Form",
               section_type: "repeating",
-              field_template: [{"name" => "test", "description" => "Test", "field_type" => "Documents::TextValue", "required" => false}]
+              field_templates: [{"name" => "test", "description" => "Test", "field_type" => "Documents::TextValue", "required" => false}]
             )
 
             @form.add_section
@@ -203,7 +203,7 @@ module Documents
               type: "Documents::Form",
               description: "Test Form",
               section_type: "repeating",
-              field_template: [
+              field_templates: [
                 {"name" => "item", "description" => "Item", "field_type" => "Documents::TextValue", "required" => true},
                 {"name" => "price", "description" => "Price", "field_type" => "Documents::DecimalValue", "required" => true}
               ]
@@ -229,7 +229,7 @@ module Documents
               type: "Documents::Form",
               description: "Test Form",
               section_type: "static",
-              field_template: [{"name" => "test", "description" => "Test", "field_type" => "Documents::TextValue", "required" => false}]
+              field_templates: [{"name" => "test", "description" => "Test", "field_type" => "Documents::TextValue", "required" => false}]
             )
 
             initial_count = @form.sections.count
@@ -266,7 +266,7 @@ module Documents
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
 
-        expect(@form.field_template).to eq []
+        expect(@form.field_templates).to eq []
       end
 
       it "persists field template configuration" do
@@ -284,11 +284,11 @@ module Documents
         @form = @container.elements.create!(
           type: "Documents::Form",
           description: "Contact Form",
-          field_template: template
+          field_templates: template
         )
 
         @form.reload
-        expect(@form.field_template).to eq template
+        expect(@form.field_templates).to eq template
       end
     end
   end
