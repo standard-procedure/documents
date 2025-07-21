@@ -6,5 +6,7 @@ module Documents
     validates :longitude, presence: true, on: :update, if: -> { required? }
 
     def value = {longitude: longitude, latitude: latitude}
+
+    def to_s = value.to_json
   end
 end

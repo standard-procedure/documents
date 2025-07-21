@@ -11,5 +11,7 @@ module Documents
     def has_value? = value.present?
 
     def path = [section.path, name.to_s].join("/")
+
+    def to_s = value.to_s
   end
 end
