@@ -1,6 +1,7 @@
 module Documents
   class Element < ApplicationRecord
     include HasAttributes
+    serialize :data, type: Hash, coder: JSON
     belongs_to :container, polymorphic: true
     validate :container_is_legal
     positioned on: :container
