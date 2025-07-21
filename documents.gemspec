@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.version = Documents::VERSION
   spec.authors = ["Rahoul Baruah"]
   spec.email = ["rahoulb@echodek.co"]
-  spec.homepage = "https://theartandscienceofruby,com/"
+  spec.homepage = "https://theartandscienceofruby.com/"
   spec.summary = "Standard Procedure: Documents"
   spec.description = "Documents"
   spec.license = "LGPL"
