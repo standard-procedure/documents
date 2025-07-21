@@ -27,3 +27,10 @@ en:
           attributes:
             value:
               invalid_data_class: "Invalid data class"
+        documents/select_value:
+          attributes:
+            value:
+              required: "Required"
+              invalid_option: "Invalid option"
+            default_value:
+              invalid_default_option: "Invalid default option"
