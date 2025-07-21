@@ -1,0 +1,20 @@
+en:
+  activerecord:
+    errors:
+      models:
+        documents/email_value:
+          attributes:
+            value:
+              invalid_email: "must be a valid email address"
+        documents/phone_value:
+          attributes:
+            value:
+              invalid_phone: "must be a valid phone number"
+        documents/url_value:
+          attributes:
+            value:
+              invalid_url: "must be a valid URL"
+        documents/checkbox_value:
+          attributes:
+            value:
+              invalid_boolean: "must be true or false"
