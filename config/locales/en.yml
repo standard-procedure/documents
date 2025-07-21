@@ -18,3 +18,8 @@ en:
           attributes:
             value:
               invalid_boolean: "must be true or false"
+        documents/signature_value:
+          attributes:
+            value:
+              required_signature: "Required signature"
+              invalid_signature: "Invalid signature"
