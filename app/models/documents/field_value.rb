@@ -7,5 +7,7 @@ module Documents
     has_many_attached :attachments
     has_attribute :comments, :string, default: ""
     def has_value? = value.present?
+
+    def path = [section.path, name.to_s].join("/")
   end
 end

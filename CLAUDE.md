@@ -31,6 +31,12 @@ bin/rails standard_procedure_documents:migrations:install db:migrate db:test:pre
 
 ## Architecture
 
+### Coding Style
+
+- Use the ternary operator instead of `if`, where possible, to keep methods short
+- Use ruby's endless methods to reduce the number of lines in class definitions
+- In specs, avoid `let` statements and define variables within the example, so it is easy to see the exact data being tested
+
 ### Core Models Hierarchy
 
 **Documents::Element** (STI base class)

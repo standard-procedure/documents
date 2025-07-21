@@ -2,7 +2,12 @@
 Configurable documents
 
 ## Usage
-Build a template using a JSON or YAML file (using [dry-validation](https://dry-rb.org/gems/dry-validation/1.10/) to ensure the schema is valid):
+
+### Creating a document from a configuration file 
+
+Build a document using a JSON or YAML file.
+
+This uses [dry-validation](https://dry-rb.org/gems/dry-validation/1.10/) to ensure the schema is valid.
 
 ```yaml
 title: Order Form
@@ -63,6 +68,23 @@ expect(@order_form).to be_kind_of(Documents::Container)
 expect(@order_form.elements.first).to be_kind_of(Documents::Paragraph)
 expect(@order_form.elements.last).to be_kind_of(Documents::Form)
 expect(@order_form.elements.last.fields.last).to be_kind_of(Documents::SignatureValue)
+```
+
+### Document Elements
+
+Documents are built out of an ordered list of Elements.  
+
+Elements can be content, such as Paragraphs, Images, Tables and Forms (although currently only Paragraphs and Forms can be loaded from a configuration file).
+
+### Configuring Forms
+
+Forms are split into two types - static and repeating - and repeating forms can be displayed as a form or a table.  
+
+A static form consists of an ordered list of FieldValues, each with a type, such as `TextValue`, `NumberValue`, `SelectValue` and so on. A repeating form also has an ordered list of FieldValues but the end-user can choose to repeat that group multiple times - for example, in an order form, you may wish to place multiple items on a single form.  
+
+FieldValues can be marked as `required`, `allow_comments` (so the end-user can add arbitrary text to their answer), `allow_attachments` (so the end-user can upload and attach files, photos and other documents to support their answer).  They can also specify a `default_value` (the meaning of which varies according to the field type) and select and multi-select values also have `options` - key/value pairs that they can pick in the user-interface.  
+
+Finally, FieldValues can also be marked as `allow_tasks` - which means that a follow-up task system can be used alongside the form itself (for example, if performing a safety inspection, noting something that is not compliant and therefore assigning a fix to another person).  
 
 ## Installation
 Add this line to your application's Gemfile:

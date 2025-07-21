@@ -9,6 +9,8 @@ module Documents
 
     def copy_to(target_container, copy_as_template: false) = nil
 
+    def path = position.to_s
+
     private def container_is_legal
       errors.add :container, :invalid unless container.is_a? Documents::Container
     end
