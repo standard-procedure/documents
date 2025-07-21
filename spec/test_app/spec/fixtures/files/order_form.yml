@@ -10,35 +10,35 @@ elements:
     fields:
       - name: company
         description: Company
-        field_type: "Documents::TextValue"
+        field_type: Documents::TextValue
         required: true
       - name: order_date
         description: Date
-        field_type: "Documents::DateValue"
+        field_type: Documents::DateValue
         required: true
-        default_value: Date.now 
+        default_value: "Date.now" 
   - element: form
     section_type: repeating
     display_type: table
     fields:
       - name: item
         description: Item
-        field_type: "Documents::TextValue"
+        field_type: Documents::TextValue
         required: true
       - name: quantity
         description: Quantity
-        field_type: "Documents::IntegerValue"
+        field_type: Documents::NumberValue
         required: true
-        default_value: 1
+        default_value: "1"
   - element: form
     section_type: static
     display_type: form
     fields:
       - name: ordered_by
         description: Your name
-        field_type: "Documents::TextValue"
+        field_type: Documents::TextValue
         required: true
       - name: signature
         description: Signed
-        field_type: "Documents::SignatureValue"
+        field_type: Documents::SignatureValue
         required: true

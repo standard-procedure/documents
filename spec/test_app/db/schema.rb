@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_21_135938) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_21_142152) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -92,6 +92,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_21_135938) do
     t.datetime "updated_at", null: false
     t.index ["form_id", "position"], name: "index_documents_form_sections_on_form_id_and_position", unique: true
     t.index ["form_id"], name: "index_documents_form_sections_on_form_id"
+  end
+
+  create_table "order_forms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -1,7 +1,7 @@
 module Documents
   ElementDefinitionSchema = Dry::Schema.Params do
     required(:element).filled(:string, included_in?: %w[paragraph form])
-    required(:description).maybe(:string)
+    optional(:description).maybe(:string)
     optional(:html).filled(:string)
     optional(:section_type).filled(:string, included_in?: %w[static repeating])
     optional(:display_type).filled(:string, included_in?: %w[form table])

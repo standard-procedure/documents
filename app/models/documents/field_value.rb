@@ -1,7 +1,11 @@
 module Documents
   class FieldValue < ApplicationRecord
-    belongs_to :section
+    include HasAttributes
+    belongs_to :section, class_name: "FormSection"
     positioned on: :section
     attribute :value
+    has_many_attached :attachments
+    has_attribute :comments, :string, default: ""
+    def has_value? = value.present?
   end
 end
