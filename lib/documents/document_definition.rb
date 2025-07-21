@@ -4,10 +4,13 @@ module Documents
   # or it could be the definition of a "form",
   # describing the questions the eventual document will contain
   # that must be answered by the end-user
+
+  DocumentDefinitionSchema = Dry::Schema.Params do
+    required(:title).filled(:string)
+    required(:elements).array(Documents::ElementDefinitionSchema)
+  end
+
   class DocumentDefinition < Dry::Validation::Contract
-    params do
-      required(:title).filled(:string)
-      required(:elements).array(Documents::ElementDefinition)
-    end
+    params(DocumentDefinitionSchema)
   end
 end

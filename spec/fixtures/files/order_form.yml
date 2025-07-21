@@ -1,10 +1,3 @@
-# Documents
-Configurable documents
-
-## Usage
-Build a template using a JSON or YAML file (using [dry-validation](https://dry-rb.org/gems/dry-validation/1.10/) to ensure the schema is valid):
-
-```yaml
 title: Order Form
 elements:
   - element: paragraph
@@ -49,38 +42,3 @@ elements:
         description: Signed
         field_type: "Documents::SignatureValue"
         required: true
-```
-
-Create a "container" - a record within your application that will hold this order form.  Then use the `Document::ElementBuilder` to add it: 
-
-```ruby
-@order_form = OrderForm.create!
-expect(@order_form).to be_kind_of(Documents::Container)
-
-Documents::ElementBuilder.call(destination: @order_form)
-
-expect(@order_form.elements.first).to be_kind_of(Documents::Paragraph)
-expect(@order_form.elements.last).to be_kind_of(Documents::Form)
-expect(@order_form.elements.last.fields.last).to be_kind_of(Documents::SignatureValue)
-
-## Installation
-Add this line to your application's Gemfile:
-
-```ruby
-gem "standard_procedure_documents"
-```
-
-And then execute:
-```bash
-$ bundle
-```
-Then copy the migrations to your Rails application:
-```bash
-bin/rails standard_procedure_documents:migrations:install db:migrate db:test:prepare
-```
-
-## Contributing
-Contributions welcome
-
-## License
-The gem is available as open source under the terms of the [LGPL License](/LICENCE).

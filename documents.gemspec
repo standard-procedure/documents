@@ -21,4 +21,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", ">= 7.1.3"
   spec.add_dependency "dry-validation"
+  spec.add_dependency "standard_procedure_has_attributes"
+  spec.add_dependency "positioning"
 end

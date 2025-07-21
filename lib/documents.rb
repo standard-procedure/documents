@@ -1,3 +1,6 @@
+require "dry/validation"
+require "positioning"
+require "has_attributes"
 require "documents/version"
 require "documents/engine"
 
