@@ -1,13 +1,13 @@
 require_relative "lib/documents/version"
 Gem::Specification.new do |spec|
-  spec.name        = "standard_procedure_documents"
-  spec.version     = Documents::VERSION
-  spec.authors     = [ "Rahoul Baruah" ]
-  spec.email       = [ "rahoulb@echodek.co" ]
-  spec.homepage    = "https://theartandscienceofruby,com/"
-  spec.summary     = "Standard Procedure: Documents"
+  spec.name = "standard_procedure_documents"
+  spec.version = Documents::VERSION
+  spec.authors = ["Rahoul Baruah"]
+  spec.email = ["rahoulb@echodek.co"]
+  spec.homepage = "https://theartandscienceofruby,com/"
+  spec.summary = "Standard Procedure: Documents"
   spec.description = "Documents"
-  spec.license     = "LGPL"
+  spec.license = "LGPL"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.com"
 
@@ -20,4 +20,5 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "rails", ">= 7.1.3"
+  spec.add_dependency "dry-schema"
 end
