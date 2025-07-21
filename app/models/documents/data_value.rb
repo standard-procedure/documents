@@ -6,7 +6,7 @@ module Documents
     validate :value_is_correct_class, if: -> { data_class.present? }
 
     private def value_is_correct_class
-      errors.add :value, :invalid if value.present? && value.is_a?(data_class.constantize)
+      errors.add :value, :invalid_data_class if value.present? && !value.is_a?(data_class.constantize)
     end
   end
 end

@@ -23,3 +23,7 @@ en:
             value:
               required_signature: "Required signature"
               invalid_signature: "Invalid signature"
+        documents/data_value:
+          attributes:
+            value:
+              invalid_data_class: "Invalid data class"
