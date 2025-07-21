@@ -5,6 +5,7 @@ module Documents
     belongs_to :section, class_name: "FormSection"
     positioned on: :section
     has_attribute :default_value, :string
+    has_many_attached :files
     has_many_attached :attachments
     has_attribute :comments, :string, default: ""
     def has_value? = value.present?
