@@ -24,19 +24,25 @@ module Documents::Container
           position: :last,
           section_type: element_config["section_type"],
           display_type: element_config["display_type"],
-          description: element_config["description"] || ""
+          description: element_config["description"] || "",
+          field_template: element_config["fields"] || []
         )
 
         # Create field values for the first section
         section = form.sections.first
         element_config["fields"]&.each do |field_config|
-          section.field_values.create!(
+          attributes = {
             type: field_config["field_type"],
             name: field_config["name"],
             description: field_config["description"],
             required: field_config["required"] || false,
             position: :last
-          )
+          }
+
+          attributes[:default_value] = field_config["default_value"] if field_config["default_value"].present?
+          attributes[:options] = field_config["options"] if field_config["options"].present?
+
+          section.field_values.create!(attributes)
         end
       end
     end
