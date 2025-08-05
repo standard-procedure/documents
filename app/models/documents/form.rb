@@ -5,6 +5,7 @@ module Documents
     enum :form_submission_status, draft: 0, submitted: 1, cancelled: -1
 
     has_many :sections, -> { order :position }, class_name: "FormSection", dependent: :destroy
+    accepts_nested_attributes_for :sections
     has_attribute :field_templates, :json, default: []
     after_save :create_first_section, if: -> { sections.empty? }
 

@@ -4,6 +4,7 @@ module Documents
     positioned on: :form
     has_many :field_values, -> { order :position }, inverse_of: :section, dependent: :destroy
     after_create :build_field_values
+    accepts_nested_attributes_for :field_values
 
     def path = [form.path, position.to_s].join("/")
 
