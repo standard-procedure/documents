@@ -5,8 +5,9 @@ module Documents
     belongs_to :container, polymorphic: true
     validate :container_is_legal
     positioned on: :container
-    attribute :description, :string, default: ""
+    has_rich_text :contents
     has_one_attached :file
+    attribute :description, :string, default: ""
 
     def copy_to(target_container, copy_as_template: false) = nil
 
