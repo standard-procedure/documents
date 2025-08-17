@@ -8,15 +8,10 @@ module Documents
     has_many_attached :files
     has_many_attached :attachments
     has_attribute :comments, :string, default: ""
-    after_save :debug_message
     def has_value? = value.present?
 
     def path = [section.path, name.to_s].join("/")
 
     def to_s = value.to_s
-
-    def debug_message
-      puts "SAVED #{inspect}"
-    end
   end
 end

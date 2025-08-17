@@ -17,9 +17,6 @@ module Documents
       sections.last.destroy if section_type_repeating? && sections.size > 1
     end
 
-    private def create_first_section
-      puts "BUILDING FIRST SECTION IN #{inspect}"
-      sections.create!
-    end
+    private def create_first_section = sections.create!
   end
 end

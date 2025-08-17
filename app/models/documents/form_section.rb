@@ -9,7 +9,6 @@ module Documents
     def path = [form.path, position.to_s].join("/")
 
     private def build_field_values
-      puts "Building Field Values in #{inspect}"
       form.field_templates.each do |field_config|
         field_values.create! attributes_from(field_config)
       end
