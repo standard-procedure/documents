@@ -2,7 +2,7 @@ module Documents
   ElementDefinitionSchema = Dry::Schema.Params do
     required(:element).filled(:string, included_in?: %w[paragraph form])
     optional(:description).maybe(:string)
-    optional(:html).filled(:string)
+    optional(:contents).filled(:string)
     optional(:section_type).filled(:string, included_in?: %w[static repeating])
     optional(:display_type).filled(:string, included_in?: %w[form table])
     optional(:fields).array(Documents::FieldDefinitionSchema)
@@ -11,8 +11,8 @@ module Documents
   class ElementDefinition < Dry::Validation::Contract
     params(ElementDefinitionSchema)
 
-    rule :html do
-      key.failure(:blank) if (values[:element] == "paragraph") && values[:html].blank?
+    rule :contents do
+      key.failure(:blank) if (values[:element] == "paragraph") && values[:contents].blank?
     end
     rule :section_type do
       key.failure(:blank) if (values[:element] == "form") && values[:section_type].blank?
