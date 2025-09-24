@@ -16,5 +16,7 @@ module Documents
     def to_s = value.to_s
 
     def allow_extras? = allow_attachments? || allow_comments? || allow_tasks?
+
+    def has_extras? = allow_extras? && (!comments.to_plain_text.blank? || fields.attachments.any?)
   end
 end
