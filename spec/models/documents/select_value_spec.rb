@@ -27,11 +27,11 @@ module Documents
         expect(field.errors[:value]).to be_empty
       end
 
-      it "accepts valid option key" do
+      it "accepts a valid value" do
         container = OrderForm.create!
         form = container.elements.create!(type: "Documents::Form", description: "Test Form")
         section = form.sections.first
-        field = section.field_values.create!(type: "Documents::SelectValue", name: "status", description: "Order Status", options: {"pending" => "Pending", "shipped" => "Shipped"})
+        field = section.field_values.create!(type: "Documents::SelectValue", name: "status", description: "Order Status", options: {"Pending" => "pending", "Shipped" => "shipped"})
 
         field.value = "pending"
         field.valid?(:update)

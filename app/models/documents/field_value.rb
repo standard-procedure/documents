@@ -1,6 +1,7 @@
 module Documents
   class FieldValue < ApplicationRecord
     include HasAttributes
+
     serialize :data, type: Hash, coder: JSON
     belongs_to :section, class_name: "FormSection"
     positioned on: :section
