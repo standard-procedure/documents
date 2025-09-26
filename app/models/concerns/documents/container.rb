@@ -3,7 +3,12 @@ module Documents::Container
 
   included do
     has_many :elements, -> { order :position }, class_name: "Documents::Element", as: :container, dependent: :destroy
+    validates_associated :elements
   end
+
+  def forms = elements.select { |e| e.is_a? Documents::Form }
+  def field_values = forms.collect(&:field_values).flatten
+  def invalid_field_values = field_values.select { |v| !v.valid? }
 
   def load_elements_from configuration
     elements_from(configuration).select do |config|

@@ -39,12 +39,42 @@ module Documents
       expect(@section.field_values.second).to be_kind_of(Documents::SignatureValue)
     end
 
+    it "knows which forms and field values it contains" do
+      @configuration = YAML.load_file(Rails.root.join("spec", "fixtures", "files", "order_form.yml"))
+
+      @order_form = OrderForm.create!
+
+      @order_form.load_elements_from(@configuration)
+
+      expect(@order_form.forms.size).to eq 3
+      expect(@order_form.field_values.size).to eq 6
+    end
+
     it "fails if given an invalid configuration" do
       @configuration = {title: "Invalid", elements: [{element: "video"}]}
 
       @order_form = OrderForm.create!
 
       expect { @order_form.load_elements_from(@configuration) }.to raise_error(ArgumentError)
+    end
+
+    it "is invalid if an element is invalid" do
+      @configuration = YAML.load_file(Rails.root.join("spec", "fixtures", "files", "order_form.yml"))
+
+      @order_form = OrderForm.create!
+
+      @order_form.load_elements_from(@configuration)
+
+      @field_value = @order_form.elements.third.sections.first.field_values.first
+      @field_value.value = ""
+      @field_value.save
+      expect(@field_value).to_not be_valid
+      expect(@field_value.section).to_not be_valid
+      expect(@field_value.section.form).to_not be_valid
+      expect(@field_value.section.form.container).to_not be_valid
+      expect(@order_form).to_not be_valid
+
+      expect(@order_form.invalid_field_values).to include @field_value
     end
   end
 end
