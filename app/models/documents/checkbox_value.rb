@@ -2,7 +2,7 @@ module Documents
   class CheckboxValue < FieldValue
     has_attribute :value, :boolean
     before_validation :set_default_value, if: -> { value.nil? && default_value.present? }
-    validates :value, inclusion: {in: [true, false], message: :invalid_boolean}, on: :update, if: -> { required? }
+    validates :value, presence: true, false], message: :invalid_boolean}, on: :update, if: -> { required? }
 
     def to_s = value ? "☑️" : "⊗"
 
