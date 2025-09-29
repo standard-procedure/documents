@@ -10,15 +10,15 @@ module Documents
         @checkbox_field = @section.field_values.create! type: "Documents::CheckboxValue", name: "terms_accepted", description: "Terms Accepted", required: true
 
         @checkbox_field.value = nil
-        @checkbox_field.valid?(:update)
+        @checkbox_field.validate
         expect(@checkbox_field.errors).to include :value
 
         @checkbox_field.value = true
-        @checkbox_field.valid?(:update)
+        @checkbox_field.validate
         expect(@checkbox_field.errors[:value]).to be_empty
 
         @checkbox_field.value = false
-        @checkbox_field.valid?(:update)
+        @checkbox_field.validate
         expect(@checkbox_field.errors[:value]).to be_empty
       end
 
