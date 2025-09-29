@@ -3,7 +3,7 @@ module Documents::Container
 
   included do
     has_many :elements, -> { order :position }, class_name: "Documents::Element", as: :container, dependent: :destroy
-    validates_associated :elements
+    validates_associated :elements, on: :update
   end
 
   def forms = elements.select { |e| e.is_a? Documents::Form }
