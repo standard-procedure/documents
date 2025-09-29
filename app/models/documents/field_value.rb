@@ -3,8 +3,10 @@ module Documents
     include HasAttributes
 
     scope :with_name, ->(name) { where(name: name) }
+
     serialize :data, type: Hash, coder: JSON
     belongs_to :section, class_name: "FormSection"
+    delegate :container, to: :section
     positioned on: :section
     has_attribute :default_value, :string
     has_many_attached :files
