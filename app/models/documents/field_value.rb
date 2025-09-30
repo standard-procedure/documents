@@ -22,5 +22,7 @@ module Documents
     def allow_extras? = allow_attachments? || allow_comments? || allow_tasks?
 
     def has_extras? = allow_extras? && (!comments.to_plain_text.blank? || files.attachments.any?)
+
+    def about = container
   end
 end
