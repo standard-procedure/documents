@@ -2,6 +2,7 @@ module Documents
   class FieldValue < ApplicationRecord
     include HasAttributes
     include HasTasks
+    include FieldValueExtensions
 
     scope :with_name, ->(name) { where(name: name) }
 
