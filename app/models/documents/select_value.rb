@@ -9,6 +9,8 @@ module Documents
 
     def to_s = value.present? ? (options.key(value) || value) : ""
 
+    def options_for_select = options.map { |k, v| [v, k] }
+
     private def set_default_value
       self.value = default_value
     end
