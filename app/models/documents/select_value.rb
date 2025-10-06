@@ -7,7 +7,7 @@ module Documents
     validates :value, inclusion: {in: ->(record) { record.options.values }, message: :invalid_option}, on: :update, allow_blank: true
     validate :default_value_is_valid_option, if: -> { default_value.present? && options.any? }
 
-    def to_s = value.present? ? (options[value] || value) : ""
+    def to_s = value.present? ? (options.key(value) || value) : ""
 
     private def set_default_value
       self.value = default_value
