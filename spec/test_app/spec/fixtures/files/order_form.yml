@@ -16,7 +16,7 @@ elements:
         description: Date
         field_type: Documents::DateValue
         required: true
-        default_value: "today" 
+        default_value: "today"
   - element: form
     section_type: repeating
     display_type: table
@@ -38,6 +38,11 @@ elements:
         description: Your name
         field_type: Documents::TextValue
         required: true
+      - name: expenses
+        description: Claim on expenses
+        field_type: Documents::YesNoValue
+        required: true
+        default_value: n
       - name: signature
         description: Signed
         field_type: Documents::SignatureValue

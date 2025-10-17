@@ -36,7 +36,8 @@ module Documents
       expect(@form).to be_display_type_form
       @section = @form.sections.first
       expect(@section.field_values.first).to be_kind_of(Documents::TextValue)
-      expect(@section.field_values.second).to be_kind_of(Documents::SignatureValue)
+      expect(@section.field_values.second).to be_kind_of(Documents::YesNoValue)
+      expect(@section.field_values.third).to be_kind_of(Documents::SignatureValue)
     end
 
     it "knows which forms and field values it contains" do
@@ -47,7 +48,7 @@ module Documents
       @order_form.load_elements_from(@configuration)
 
       expect(@order_form.forms.size).to eq 3
-      expect(@order_form.field_values.size).to eq 6
+      expect(@order_form.field_values.size).to eq 7
     end
 
     it "fails if given an invalid configuration" do
