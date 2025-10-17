@@ -119,5 +119,33 @@ module Documents
         expect(field.to_s).to eq("")
       end
     end
+
+    describe "display style" do
+      it "defaults to select" do
+        container = OrderForm.create!
+        form = container.elements.create!(type: "Documents::Form", description: "Test Form")
+        section = form.sections.first
+        field = section.field_values.create!(type: "Documents::SelectValue", name: "status", description: "Order Status", options: {"pending" => "Pending Order"})
+
+        expect(field.display_style).to eq "select"
+      end
+
+      it "allows select or buttons as styles" do
+        container = OrderForm.create!
+        form = container.elements.create!(type: "Documents::Form", description: "Test Form")
+        section = form.sections.first
+        field = section.field_values.new(type: "Documents::SelectValue", name: "status", description: "Order Status", display_style: "select", options: {"pending" => "Pending Order"})
+        field.validate
+        expect(field.errors).to_not include :display_style
+
+        field.display_style = "buttons"
+        field.validate
+        expect(field.errors).to_not include :display_style
+
+        field.display_style = "something_else"
+        field.validate
+        expect(field.errors).to include :display_style
+      end
+    end
   end
 end

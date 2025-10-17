@@ -2,7 +2,10 @@ module Documents
   class SelectValue < FieldValue
     has_attribute :value, :string
     has_attribute :options, :json, default: {}
+    has_attribute :display_style, :string
     before_validation :set_default_value, if: -> { value.blank? && default_value.present? }
+    before_validation :set_default_display_style, if: -> { display_style.blank? }
+    validates :display_style, inclusion: {in: %w[select buttons]}
     validates :value, presence: {message: :required}, on: :update, if: -> { required? }
     validates :value, inclusion: {in: ->(record) { record.options.keys }, message: :invalid_option}, on: :update, allow_blank: true
     validate :default_value_is_valid_option, if: -> { default_value.present? && options.any? }
@@ -13,6 +16,10 @@ module Documents
 
     private def set_default_value
       self.value = default_value
+    end
+
+    private def set_default_display_style
+      self.display_style = "select"
     end
 
     private def default_value_is_valid_option
