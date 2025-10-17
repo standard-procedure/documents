@@ -31,7 +31,7 @@ module Documents
         container = OrderForm.create!
         form = container.elements.create!(type: "Documents::Form", description: "Test Form")
         section = form.sections.first
-        field = section.field_values.create!(type: "Documents::SelectValue", name: "status", description: "Order Status", options: {"Pending" => "pending", "Shipped" => "shipped"})
+        field = section.field_values.create!(type: "Documents::SelectValue", name: "status", description: "Order Status", options: {"pending" => "Pending", "shipped" => "Shipped"})
 
         field.value = "pending"
         field.valid?(:update)
