@@ -8,6 +8,7 @@ module Documents
     optional(:allow_attachments).filled(:bool)
     optional(:allow_tasks).filled(:bool)
     optional(:default_value).maybe(:string)
+    optional(:display_style).filled(:string)
     optional(:options).filled(:hash)
     optional(:data_class).filled(:string)
   end
@@ -17,6 +18,9 @@ module Documents
 
     rule(:options) do
       key.failure(:blank) if %w[Documents::SelectValue Documents::MultiSelectValue].include?(values[:field_type]) && values[:options].empty?
+    end
+    rule(:display_style) do
+      key.failure(:invalid) if %w[Documents::SelectValue].include?(values[:field_type]) && !values[:display_style].empty? && !%w[drop_down buttons].include?(values[:display_style])
     end
   end
 end
