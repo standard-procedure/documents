@@ -71,8 +71,6 @@ module Documents
         @section = @form.sections.first
         @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "active", description: "Active", required: true, options: {allows_na: true}
 
-        puts @yes_no_field.allows_na?
-
         @yes_no_field.value = true
         expect(@yes_no_field).to be_valid
         expect(@yes_no_field.value).to eq "y"
@@ -172,6 +170,24 @@ module Documents
 
         @yes_no_field.validate
         expect(@yes_no_field.value).to be_nil
+      end
+
+      it "has an option for inverting colours" do
+        @container = OrderForm.create!
+        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+        @section = @form.sections.first
+        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, options: {invert_colours: true}
+
+        expect(@yes_no_field.invert_colours?).to be true
+      end
+
+      it "defaults to invert_colours being false" do
+        @container = OrderForm.create!
+        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+        @section = @form.sections.first
+        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, options: {}
+
+        expect(@yes_no_field.invert_colours?).to be false
       end
     end
   end

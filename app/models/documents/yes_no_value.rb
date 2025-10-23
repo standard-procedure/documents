@@ -10,6 +10,8 @@ module Documents
 
     def allows_na? = (options || {}).dig("allows_na") || false
 
+    def invert_colours? = (options || {}).dig("invert_colours") || false
+
     private def convert_value
       self.value = convert(value)
     end
