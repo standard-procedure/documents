@@ -52,7 +52,7 @@ module Documents
     end
 
     it "fails if given an invalid configuration" do
-      @configuration = {title: "Invalid", elements: [{element: "video"}]}
+      @configuration = {title: "Invalid", elements: [{element: "potato"}]}
 
       @order_form = OrderForm.create!
 

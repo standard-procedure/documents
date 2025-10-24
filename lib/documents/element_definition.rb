@@ -1,8 +1,9 @@
 module Documents
   ElementDefinitionSchema = Dry::Schema.Params do
-    required(:element).filled(:string, included_in?: %w[paragraph form])
+    required(:element).filled(:string, included_in?: %w[paragraph form download image video pdf])
     optional(:description).maybe(:string)
     optional(:contents).filled(:string)
+    optional(:url).filled(:string)
     optional(:section_type).filled(:string, included_in?: %w[static repeating])
     optional(:display_type).filled(:string, included_in?: %w[form table])
     optional(:fields).array(Documents::FieldDefinitionSchema)
@@ -23,5 +24,10 @@ module Documents
     rule :fields do
       key.failure(:blank) if (values[:element] == "form") && values[:fields].empty?
     end
+    rule :url do
+      key.failure(:blank) if REQUIRE_URL.include?(values[:element]) && values[:url].empty?
+    end
   end
+
+  REQUIRE_URL = %w[download image video pdf].freeze
 end
