@@ -1,6 +1,6 @@
 module Documents
   class TimeValue < FieldValue
-    has_attribute :value, :datetime
+    has_attribute :value, :time
     before_validation :set_default_value, if: -> { value.blank? && default_value.present? }
     validates :value, presence: true, on: :update, if: -> { required? }
 

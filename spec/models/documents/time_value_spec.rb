@@ -2,6 +2,8 @@ require "rails_helper"
 
 module Documents
   RSpec.describe TimeValue, type: :model do
+    include ActiveSupport::Testing::TimeHelpers
+
     describe "validations" do
       it "requires a value when the field is required" do
         @container = OrderForm.create!
@@ -35,18 +37,20 @@ module Documents
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
-        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "appointment_time", description: "Appointment Time", default_value: "2024-01-01 14:30:00"
+        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "appointment_time", description: "Appointment Time", default_value: "14:30:00"
 
-        expect(@time_field.value).to eq Time.parse("2024-01-01 14:30:00")
+        expect(@time_field.value.hour).to eq 14
+        expect(@time_field.value.min).to eq 30
       end
 
       it "overrides the default value when a value is provided" do
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
-        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "appointment_time", description: "Appointment Time", default_value: "2024-01-01 14:30:00", value: Time.new(2024, 12, 25, 9, 0, 0)
+        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "appointment_time", description: "Appointment Time", default_value: "14:30", value: Time.new(2024, 12, 25, 9, 0, 0)
 
-        expect(@time_field.value).to eq Time.new(2024, 12, 25, 9, 0, 0)
+        expect(@time_field.value.hour).to eq 9
+        expect(@time_field.value.min).to eq 0
       end
 
       it "handles nil default value" do
@@ -63,30 +67,23 @@ module Documents
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
 
-        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "now"
-        # Use a small tolerance since Time.current might differ slightly between creation and test
-        expect(@time_field.value).to be_within(1.second).of(Time.current)
-        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "in 3 hours"
-        # Use a small tolerance since Time.current might differ slightly between creation and test
-        expect(@time_field.value).to be_within(1.second).of(3.hours.from_now)
-        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "yesterday at 9am"
-        # Use a small tolerance since Time.current might differ slightly between creation and test
-        expect(@time_field.value).to be_within(1.second).of(1.day.ago.change(hour: 9, min: 0, sec: 0))
-        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "tomorrow at 5pm"
-        # Use a small tolerance since Time.current might differ slightly between creation and test
-        expect(@time_field.value).to be_within(1.second).of(1.day.from_now.change(hour: 17, min: 0, sec: 0))
-        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "25th November 1998 at 11am"
-        # Use a small tolerance since Time.current might differ slightly between creation and test
-        expect(@time_field.value).to be_within(1.second).of(Time.new(1998, 11, 25, 11))
-        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "7 days from now"
-        # Use a small tolerance since Time.current might differ slightly between creation and test
-        expect(@time_field.value).to be_within(1.second).of(7.days.from_now)
-        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "90 days ago"
-        # Use a small tolerance since Time.current might differ slightly between creation and test
-        expect(@time_field.value).to be_within(1.second).of(90.days.ago)
-        @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "next tuesday at 12pm"
-        # Use a small tolerance since Time.current might differ slightly between creation and test
-        expect(@time_field.value).to be_within(1.second).of(Date.current.next_week(:tuesday).to_datetime.change(hour: 12, min: 0, sec: 0))
+        freeze_time do
+          @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "now"
+          expect(@time_field.value.hour).to eq Time.current.hour
+          expect(@time_field.value.min).to eq Time.current.min
+
+          @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "in 3 hours"
+          expect(@time_field.value.hour).to eq Time.current.hour + 3
+          expect(@time_field.value.min).to eq Time.current.min
+
+          @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "9am"
+          expect(@time_field.value.hour).to eq 9
+          expect(@time_field.value.min).to eq 0
+
+          @time_field = @section.field_values.create! type: "Documents::TimeValue", name: "created_at", description: "Created At", default_value: "17:17"
+          expect(@time_field.value.hour).to eq 17
+          expect(@time_field.value.min).to eq 17
+        end
       end
     end
   end
