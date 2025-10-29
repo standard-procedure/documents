@@ -7,7 +7,7 @@ module Documents
     def to_s = value.present? ? I18n.l(value, format: :long) : ""
 
     private def set_default_value
-      self.value = (default_value == "today") ? Date.current : Date.parse(default_value)
+      self.value = Chronic.parse(default_value)
     end
   end
 end

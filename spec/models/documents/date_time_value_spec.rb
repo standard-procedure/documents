@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module Documents
-  RSpec.describe TimeValue, type: :model do
+  RSpec.describe DateTimeValue, type: :model do
     describe "validations" do
       it "requires a value when the field is required" do
         @container = OrderForm.create!

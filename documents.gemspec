@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-validation"
   spec.add_dependency "standard_procedure_has_attributes"
   spec.add_dependency "positioning"
+  spec.add_dependency "chronic"
 end

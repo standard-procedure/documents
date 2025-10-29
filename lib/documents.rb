@@ -3,6 +3,7 @@ require "positioning"
 require "has_attributes"
 require "documents/version"
 require "documents/engine"
+require "chronic"
 
 module Documents
   require_relative "documents/field_definition"
