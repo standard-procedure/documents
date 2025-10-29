@@ -7,7 +7,9 @@ module Documents
     validate :container_is_legal
     positioned on: :container
     has_rich_text :contents
-    has_one_attached :file
+    has_one_attached :file do |file|
+      ImageDefaults.for file
+    end
     attribute :description, :string, default: ""
     attribute :url, :string, default: ""
     after_save :attach_file, if: -> { !file.attached? && url.present? }

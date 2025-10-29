@@ -1,6 +1,7 @@
 require "dry/validation"
 require "positioning"
 require "has_attributes"
+require "documents/image_defaults"
 require "documents/version"
 require "documents/engine"
 require "chronic"
