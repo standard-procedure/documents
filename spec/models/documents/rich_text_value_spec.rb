@@ -24,7 +24,7 @@ module Documents
         @section = @form.sections.first
         @rich_text_field = @section.field_values.create! type: "Documents::RichTextValue", name: "content", description: "Rich Content", default_value: "<p>Default content</p>"
 
-        expect(@rich_text_field.value).to eq "<p>Default content</p>"
+        expect(@rich_text_field.value.to_plain_text).to eq "Default content"
       end
     end
   end
