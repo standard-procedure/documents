@@ -1,7 +1,7 @@
 module Documents
   module ImageDefaults
     def self.for attachment
-      attachment.variant :xtiny, resize_to_limit: [16, 16]
+      attachment.variant :xtiny, resize_to_limit: [32, 32]
       attachment.variant :tiny, resize_to_limit: [64, 64]
       attachment.variant :thumb, resize_to_limit: [128, 128]
       attachment.variant :small, resize_to_limit: [256, 256]
