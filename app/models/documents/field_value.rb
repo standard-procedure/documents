@@ -8,9 +8,11 @@ module Documents
 
     serialize :data, type: Hash, coder: JSON
     belongs_to :section, class_name: "FormSection"
-    delegate :container, to: :section
+    delegate :form, to: :section
+    delegate :container, to: :form
     positioned on: :section
     has_attribute :default_value, :string
+    has_attribute :configuration, :json
     has_many_attached :files do |file|
       ImageDefaults.for file
     end

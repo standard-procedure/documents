@@ -46,6 +46,17 @@ module Documents
         expect(@form2.position).to eq 2
         expect(@field.path).to eq "2/1/signature"
       end
+
+      it "stores an optional configuration" do
+        @container = OrderForm.create!
+        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+        @section = @form.sections.first
+
+        @field_value = @section.field_values.create! type: "Documents::TextValue", name: "first_name", description: "First Name", configuration: {some: "options"}
+        @field_value.reload
+
+        expect(@field_value.configuration["some"]).to eq "options"
+      end
     end
   end
 end
