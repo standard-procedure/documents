@@ -6,6 +6,8 @@ module Documents
 
     scope :with_name, ->(name) { where(name: name) }
 
+    validates :name, presence: true
+    validates :description, presence: true
     serialize :data, type: Hash, coder: JSON
     belongs_to :section, class_name: "FormSection"
     delegate :form, to: :section
@@ -19,7 +21,6 @@ module Documents
     has_many_attached :attachments do |attachment|
       ImageDefaults.for attachment
     end
-
     has_rich_text :comments
 
     def has_value? = value.present?
