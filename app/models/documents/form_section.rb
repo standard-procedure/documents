@@ -1,5 +1,7 @@
 module Documents
   class FormSection < ApplicationRecord
+    include FormSectionExtensions
+
     belongs_to :form, inverse_of: :sections
     delegate :container, to: :form
     positioned on: :form

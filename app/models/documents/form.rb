@@ -1,5 +1,7 @@
 module Documents
   class Form < Element
+    include FormExtensions
+
     enum :section_type, {static: 0, repeating: 1}, prefix: true
     enum :display_type, {form: 0, table: 1}, prefix: true
     enum :form_submission_status, draft: 0, submitted: 1, cancelled: -1
