@@ -29,9 +29,10 @@ module Documents
       key.failure(:blank) if REQUIRE_URL.include?(values[:element]) && values[:url].empty?
     end
     rule :filename do
-      key.failure(:blank) if REQUIRE_URL.include?(values[:element]) && values[:filename].empty?
+      key.failure(:blank) if REQUIRE_FILENAME.include?(values[:element]) && values[:filename].empty?
     end
   end
 
   REQUIRE_URL = %w[download image video pdf].freeze
+  REQUIRE_FILENAME = %w[download image pdf].freeze
 end

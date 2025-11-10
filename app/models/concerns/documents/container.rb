@@ -20,7 +20,9 @@ module Documents::Container
 
   private def create_paragraph_from(config) = elements.create!(config.merge(type: "Documents::Paragraph", position: :last))
   private def create_pdf_from(config) = elements.create!(config.merge(type: "Documents::Pdf", position: :last))
-
+  private def create_image_from(config) = elements.create!(config.merge(type: "Documents::Image", position: :last))
+  private def create_download_from(config) = elements.create!(config.merge(type: "Documents::Download", position: :last))
+  private def create_video_from(config) = elements.create!(config.merge(type: "Documents::Video", position: :last))
   private def create_form_from(config) = elements.create!(config.merge(type: "Documents::Form", position: :last, field_templates: config.delete(:fields)))
 
   private def elements_from configuration

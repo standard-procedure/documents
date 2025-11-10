@@ -5,6 +5,8 @@ module Documents
     before do
       # Mock out HTTP calls
       allow(Net::HTTP).to receive(:get).with("http://example.com/pdf").and_return(File.open(File.join("spec", "fixtures", "files", "document.pdf")))
+      allow(Net::HTTP).to receive(:get).with("http://example.com/image").and_return(File.open(Rails.root.join("spec", "fixtures", "files", "bubble.jpg")))
+      allow(Net::HTTP).to receive(:get).with("http://example.com/download").and_return(File.open(File.join("spec", "fixtures", "files", "document.pdf")))
     end
 
     it "builds a document from a valid configuration" do
@@ -13,7 +15,7 @@ module Documents
 
       @order_form.load_elements_from(@configuration)
 
-      expect(@order_form.elements.size).to eq 6
+      expect(@order_form.elements.size).to eq 9
 
       expect(@order_form.elements[0]).to be_kind_of Documents::Paragraph
       expect(@order_form.elements[1]).to be_kind_of Documents::Paragraph
@@ -21,6 +23,8 @@ module Documents
       expect(@order_form.elements[3]).to be_kind_of Documents::Form
       expect(@order_form.elements[4]).to be_kind_of Documents::Form
       expect(@order_form.elements[5]).to be_kind_of Documents::Pdf
+      expect(@order_form.elements[6]).to be_kind_of Documents::Image
+      expect(@order_form.elements[7]).to be_kind_of Documents::Download
 
       @form = @order_form.elements[2]
       expect(@form).to be_section_type_static
@@ -43,6 +47,22 @@ module Documents
       expect(@section.field_values.first).to be_kind_of(Documents::TextValue)
       expect(@section.field_values.second).to be_kind_of(Documents::YesNoValue)
       expect(@section.field_values.third).to be_kind_of(Documents::SignatureValue)
+
+      @pdf = @order_form.elements[5]
+      expect(@pdf.file).to be_attached
+      expect(@pdf.file.filename.to_s).to eq "document.pdf"
+
+      @image = @order_form.elements[6]
+      expect(@image.file).to be_attached
+      expect(@image.file.filename.to_s).to eq "image.jpg"
+
+      @download = @order_form.elements[7]
+      expect(@download.file).to be_attached
+      expect(@download.file.filename.to_s).to eq "document.pdf"
+
+      @video = @order_form.elements[8]
+      expect(@video.url).to eq "http://example.com/video"
+      expect(@video.file).not_to be_attached
     end
 
     it "knows which forms and field values it contains" do

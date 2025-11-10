@@ -49,3 +49,12 @@ elements:
         required: true
   - element: pdf
     url: http://example.com/pdf
+    filename: document.pdf
+  - element: image
+    url: http://example.com/image
+    filename: image.jpg
+  - element: download
+    url: http://example.com/download
+    filename: document.pdf
+  - element: video
+    url: http://example.com/video
