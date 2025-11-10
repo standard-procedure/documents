@@ -24,7 +24,7 @@ module Documents
     end
 
     private def attach_file
-      file.attach io: Net::HTTP.get(url), filename: filename.to_s
+      file.attach io: Net::HTTP.get(URI(url)), filename: filename.to_s
     end
   end
 end

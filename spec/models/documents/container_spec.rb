@@ -4,9 +4,9 @@ module Documents
   RSpec.describe Container do
     before do
       # Mock out HTTP calls
-      allow(Net::HTTP).to receive(:get).with("http://example.com/pdf").and_return(File.open(File.join("spec", "fixtures", "files", "document.pdf")))
-      allow(Net::HTTP).to receive(:get).with("http://example.com/image").and_return(File.open(Rails.root.join("spec", "fixtures", "files", "bubble.jpg")))
-      allow(Net::HTTP).to receive(:get).with("http://example.com/download").and_return(File.open(File.join("spec", "fixtures", "files", "document.pdf")))
+      allow(Net::HTTP).to receive(:get).with(URI("http://example.com/pdf")).and_return(File.open(File.join("spec", "fixtures", "files", "document.pdf")))
+      allow(Net::HTTP).to receive(:get).with(URI("http://example.com/image")).and_return(File.open(Rails.root.join("spec", "fixtures", "files", "bubble.jpg")))
+      allow(Net::HTTP).to receive(:get).with(URI("http://example.com/download")).and_return(File.open(File.join("spec", "fixtures", "files", "document.pdf")))
     end
 
     it "builds a document from a valid configuration" do

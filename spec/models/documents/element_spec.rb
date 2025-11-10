@@ -24,7 +24,7 @@ module Documents
     it "loads the file based upon the supplied URL" do
       @container = OrderForm.create!
       @url = "https://example.com/document.pdf"
-      allow(Net::HTTP).to receive(:get).with(@url).and_return(File.open("spec/fixtures/files/document.pdf"))
+      allow(Net::HTTP).to receive(:get).with(URI(@url)).and_return(File.open("spec/fixtures/files/document.pdf"))
 
       @element = Documents::Element.new container: @container, url: @url, filename: "document.pdf"
       @element.save!
