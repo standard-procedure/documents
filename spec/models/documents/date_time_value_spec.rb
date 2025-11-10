@@ -89,7 +89,10 @@ module Documents
           expect(@time_field.value).to be_within(1.second).of(90.days.ago)
           @time_field = @section.field_values.create! type: "Documents::DateTimeValue", name: "created_at", description: "Created At", default_value: "next tuesday at 12pm"
           # Use a small tolerance since Time.current might differ slightly between creation and test
-          expect(@time_field.value).to be_within(1.second).of(Date.current.next_week(:tuesday).to_datetime.change(hour: 12, min: 0, sec: 0))
+          expected = Date.current.next_week(:tuesday).to_datetime.change(hour: 12, min: 0, sec: 0)
+          # If today is monday, subtract 7 days to the expected date because the next tuesday is this week
+          expected -= 7.days if Date.current.wday == 1
+          expect(@time_field.value).to be_within(1.second).of(expected)
         end
       end
     end

@@ -12,13 +12,14 @@ module Documents::Container
 
   def load_elements_from configuration
     elements_from(configuration).select do |config|
-      %w[paragraph form].include? config[:element]
+      %w[paragraph form download image video pdf].include? config[:element]
     end.collect do |config|
       send :"create_#{config[:element]}_from", config.except(:element)
     end
   end
 
   private def create_paragraph_from(config) = elements.create!(config.merge(type: "Documents::Paragraph", position: :last))
+  private def create_pdf_from(config) = elements.create!(config.merge(type: "Documents::Pdf", position: :last))
 
   private def create_form_from(config) = elements.create!(config.merge(type: "Documents::Form", position: :last, field_templates: config.delete(:fields)))
 

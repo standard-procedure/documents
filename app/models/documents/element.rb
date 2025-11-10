@@ -12,6 +12,7 @@ module Documents
     end
     attribute :description, :string, default: ""
     attribute :url, :string, default: ""
+    attribute :filename, :string, default: ""
     after_save :attach_file, if: -> { !file.attached? && url.present? }
 
     def copy_to(target_container, copy_as_template: false) = nil
@@ -23,7 +24,7 @@ module Documents
     end
 
     private def attach_file
-      file.attach io: Net::HTTP.get(url), filename: "document.pdf"
+      file.attach io: Net::HTTP.get(url), filename: filename.to_s
     end
   end
 end

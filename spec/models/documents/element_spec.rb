@@ -25,8 +25,8 @@ module Documents
       @container = OrderForm.create!
       @url = "https://example.com/document.pdf"
       allow(Net::HTTP).to receive(:get).with(@url).and_return(File.open("spec/fixtures/files/document.pdf"))
-      @element = Documents::Element.new container: @container, url: @url
-      puts @element.url
+
+      @element = Documents::Element.new container: @container, url: @url, filename: "document.pdf"
       @element.save!
       expect(@element.file).to be_attached
       expect(@element.file.filename.to_s).to eq "document.pdf"

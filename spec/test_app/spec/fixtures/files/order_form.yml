@@ -47,3 +47,5 @@ elements:
         description: Signed
         field_type: Documents::SignatureValue
         required: true
+  - element: pdf
+    url: http://example.com/pdf
