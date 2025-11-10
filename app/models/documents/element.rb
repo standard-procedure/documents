@@ -24,7 +24,12 @@ module Documents
     end
 
     private def attach_file
-      file.attach io: Net::HTTP.get(URI(url)), filename: filename.to_s
+      Tempfile.create do |download|
+        download.binmode
+        download.write Net::HTTP.get(URI(url))
+        download.close
+        file.attach io: File.open(download.path), filename: filename.to_s
+      end
     end
   end
 end
