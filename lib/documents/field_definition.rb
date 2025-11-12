@@ -11,7 +11,7 @@ module Documents
     optional(:display_style).filled(:string)
     optional(:options).filled(:hash)
     optional(:data_class).filled(:string)
-    optional(:configuration).filled(:hash)
+    optional(:configuration).maybe(:hash)
   end
 
   class FieldDefinition < Dry::Validation::Contract
