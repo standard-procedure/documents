@@ -9,7 +9,7 @@ module Documents
     optional(:allow_tasks).filled(:bool)
     optional(:default_value).maybe(:string)
     optional(:display_style).filled(:string)
-    optional(:options).filled(:hash)
+    optional(:options).maybe(:hash)
     optional(:data_class).filled(:string)
     optional(:configuration).maybe(:hash)
   end
