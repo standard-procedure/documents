@@ -1,16 +1,15 @@
 module Documents
   class YesNoValue < FieldValue
     has_attribute :value, :string
-    has_attribute :options, :json, default: {}
     before_validation :set_default_value, if: -> { value.nil? && default_value.present? }
     before_validation :convert_value, if: -> { value.present? }
     validates :value, presence: true, on: :update, if: -> { required? }
     validates :value, inclusion: {in: %w[y n]}, on: :update, if: -> { value.present? && !allows_na? }
     validates :value, inclusion: {in: %w[y n na]}, on: :update, if: -> { value.present? && allows_na? }
 
-    def allows_na? = (options || {}).dig("allows_na") || false
+    def allows_na? = (configuration || {}).dig("allows_na") || false
 
-    def invert_colours? = (options || {}).dig("invert_colours") || false
+    def invert_colours? = (configuration || {}).dig("invert_colours") || false
 
     private def convert_value
       self.value = convert(value)

@@ -7,7 +7,7 @@ module Documents
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
-        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, options: {}
+        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {}
 
         expect(@yes_no_field.allows_na?).to be false
       end
@@ -16,7 +16,7 @@ module Documents
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
-        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, options: {allows_na: false}
+        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {allows_na: false}
 
         @yes_no_field.value = nil
         @yes_no_field.validate
@@ -35,7 +35,7 @@ module Documents
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
-        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, options: {allows_na: true}
+        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {allows_na: true}
 
         @yes_no_field.value = nil
         @yes_no_field.validate
@@ -69,7 +69,7 @@ module Documents
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
-        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "active", description: "Active", required: true, options: {allows_na: true}
+        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "active", description: "Active", required: true, configuration: {allows_na: true}
 
         @yes_no_field.value = true
         expect(@yes_no_field).to be_valid
@@ -88,7 +88,7 @@ module Documents
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
-        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "active", description: "Active", options: {allows_na: true}
+        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "active", description: "Active", configuration: {allows_na: true}
 
         @yes_no_field.value = "1"
         expect(@yes_no_field).to be_valid
@@ -176,7 +176,7 @@ module Documents
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
-        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, options: {invert_colours: true}
+        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {invert_colours: true}
 
         expect(@yes_no_field.invert_colours?).to be true
       end
@@ -185,7 +185,7 @@ module Documents
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
-        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, options: {}
+        @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {}
 
         expect(@yes_no_field.invert_colours?).to be false
       end
