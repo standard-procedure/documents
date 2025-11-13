@@ -47,6 +47,9 @@ module Documents
       expect(@section.field_values.first).to be_kind_of(Documents::TextValue)
       expect(@section.field_values.second).to be_kind_of(Documents::YesNoValue)
       expect(@section.field_values.third).to be_kind_of(Documents::SignatureValue)
+      @yes_no_value = @section.field_values.second
+      expect(@yes_no_value.allows_na?).to be false
+      expect(@yes_no_value.invert_colours?).to be true
 
       @pdf = @order_form.elements[5]
       expect(@pdf.file).to be_attached

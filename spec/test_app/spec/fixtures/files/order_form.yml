@@ -43,6 +43,9 @@ elements:
         field_type: Documents::YesNoValue
         required: true
         default_value: n
+        configuration:
+          allows_na: false 
+          invert_colours: true
       - name: signature
         description: Signed
         field_type: Documents::SignatureValue
