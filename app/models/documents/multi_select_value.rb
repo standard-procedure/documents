@@ -1,7 +1,6 @@
 module Documents
   class MultiSelectValue < FieldValue
     has_attribute :value, :json, default: []
-    has_attribute :options, :json, default: {}
     before_validation :set_default_value, if: -> { value.blank? && default_value.present? }
     validates :value, presence: {message: :required}, on: :update, if: -> { required? }
     validate :all_values_are_valid_options, if: -> { value.present? && options.any? }

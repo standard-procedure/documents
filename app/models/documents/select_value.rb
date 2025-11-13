@@ -1,7 +1,6 @@
 module Documents
   class SelectValue < FieldValue
     has_attribute :value, :string
-    has_attribute :options, :json, default: {}
     has_attribute :display_style, :string
     before_validation :set_default_value, if: -> { value.blank? && default_value.present? }
     before_validation :set_default_display_style, if: -> { display_style.blank? }
