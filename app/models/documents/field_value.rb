@@ -14,6 +14,7 @@ module Documents
     delegate :container, to: :form
     positioned on: :section
     has_attribute :default_value, :string
+    has_attribute :display_style, :string
     has_attribute :options, :json, default: {}
     has_attribute :configuration, :json
     has_many_attached :files do |file|
