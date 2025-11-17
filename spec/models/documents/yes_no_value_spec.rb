@@ -200,7 +200,7 @@ module Documents
         @section = @form.sections.first
         @field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {invert_colours: true}, value: "y"
 
-        expect(@field.score).to eq 1
+        expect(@field.score).to eq 1.0
       end
 
       it "has a score of 0 for no" do
@@ -209,7 +209,7 @@ module Documents
         @section = @form.sections.first
         @field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {invert_colours: true}, value: "n"
 
-        expect(@field.score).to eq 0
+        expect(@field.score).to eq 0.0
       end
 
       it "has a score of 0 for n/a" do
@@ -218,7 +218,7 @@ module Documents
         @section = @form.sections.first
         @field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {invert_colours: true, allows_na: true}, value: "na"
 
-        expect(@field.score).to eq 0
+        expect(@field.score).to eq 0.0
       end
     end
   end

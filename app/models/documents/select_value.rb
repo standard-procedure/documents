@@ -12,7 +12,7 @@ module Documents
 
     def options_for_select = options.map { |k, v| [v, k] }
 
-    def score = value.to_i
+    def score = value.to_f
 
     private def set_default_value
       self.value = default_value

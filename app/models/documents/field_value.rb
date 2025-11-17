@@ -31,7 +31,7 @@ module Documents
 
     def to_s = value.to_s
 
-    def score = 0
+    def score = 0.0
 
     def allow_extras? = allow_attachments? || allow_comments? || allow_tasks?
 

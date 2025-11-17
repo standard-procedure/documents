@@ -153,13 +153,13 @@ module Documents
         container = OrderForm.create!
         form = container.elements.create!(type: "Documents::Form", description: "Test Form")
         section = form.sections.first
-        field = section.field_values.create!(type: "Documents::SelectValue", name: "status", description: "Order Status", options: {"0" => "Zero", "1" => "One", "2" => "Two"}, default_value: "0")
+        field = section.field_values.create!(type: "Documents::SelectValue", name: "status", description: "Order Status", options: {"0" => "Zero", "1.1" => "One", "2.2" => "Two"}, default_value: "0")
 
-        expect(field.score).to eq 0
-        field.value = "1"
-        expect(field.score).to eq 1
-        field.value = "2"
-        expect(field.score).to eq 2
+        expect(field.score).to eq 0.0
+        field.value = "1.1"
+        expect(field.score).to eq 1.1
+        field.value = "2.2"
+        expect(field.score).to eq 2.2
       end
     end
   end
