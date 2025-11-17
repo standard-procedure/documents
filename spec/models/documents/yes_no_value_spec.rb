@@ -64,7 +64,9 @@ module Documents
         @yes_no_field.valid?(:update)
         expect(@yes_no_field.errors[:value]).to be_empty
       end
+    end
 
+    describe "values" do
       it "accepts boolean values" do
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
@@ -188,6 +190,35 @@ module Documents
         @yes_no_field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {}
 
         expect(@yes_no_field.invert_colours?).to be false
+      end
+    end
+
+    describe "scoring" do
+      it "has a score of 1 for yes" do
+        @container = OrderForm.create!
+        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+        @section = @form.sections.first
+        @field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {invert_colours: true}, value: "y"
+
+        expect(@field.score).to eq 1
+      end
+
+      it "has a score of 0 for no" do
+        @container = OrderForm.create!
+        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+        @section = @form.sections.first
+        @field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {invert_colours: true}, value: "n"
+
+        expect(@field.score).to eq 0
+      end
+
+      it "has a score of 0 for n/a" do
+        @container = OrderForm.create!
+        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+        @section = @form.sections.first
+        @field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {invert_colours: true, allows_na: true}, value: "na"
+
+        expect(@field.score).to eq 0
       end
     end
   end

@@ -11,6 +11,8 @@ module Documents
 
     def invert_colours? = (configuration || {}).dig("invert_colours") || false
 
+    def score = (value == "y") ? 1 : 0
+
     private def convert_value
       self.value = convert(value)
     end
