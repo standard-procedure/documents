@@ -1,8 +1,7 @@
 group :development do
   guard :rspec, cmd: "bundle exec rspec" do
     watch(%r{^spec/.+_spec.rb$})
-    watch(%r{^lib/(.+).rb$}) { "spec" }
-    watch(%r{^app/(.+).rb$}) { "spec" }
+    watch(%r{^app/(.+).rb$}) { |m| "spec/#{m[1]}_spec.rb" }
   end
 
   guard :bundler do
