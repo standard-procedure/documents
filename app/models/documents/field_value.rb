@@ -16,6 +16,7 @@ module Documents
     has_attribute :default_value, :string
     has_attribute :display_style, :string
     has_attribute :options, :json, default: {}
+    has_attribute :option_values, :json, default: []
     has_attribute :configuration, :json
     has_many_attached :files do |file|
       ImageDefaults.for file

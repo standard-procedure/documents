@@ -1,4 +1,15 @@
 module Documents
+  module Types
+    include Dry::Types()
+  end
+
+  OptionsValue = Dry::Schema.Params do
+    required(:key).filled(:string)
+    required(:value).filled(:string)
+    optional(:colour).filled(:string).value(format?: /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
+    optional(:score).filled(:float)
+  end
+
   FieldDefinitionSchema = Dry::Schema.Params do
     required(:name).filled(:string)
     required(:description).filled(:string)
@@ -9,7 +20,8 @@ module Documents
     optional(:allow_tasks).filled(:bool)
     optional(:default_value).maybe(:string)
     optional(:display_style).filled(:string)
-    optional(:options).maybe(:hash)
+    optional(:options).filled(:hash)
+    optional(:option_values).array(OptionsValue)
     optional(:data_class).filled(:string)
     optional(:configuration).maybe(:hash)
   end

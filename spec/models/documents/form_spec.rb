@@ -156,7 +156,8 @@ module Documents
             multi_select_field = new_section.field_values.find_by(name: "tags")
 
             expect(select_field.type).to eq "Documents::SelectValue"
-            expect(select_field.options).to eq({"electronics" => "Electronics", "books" => "Books"})
+            expect(select_field.keys).to eq ["electronics", "books"]
+            expect(select_field.values).to eq ["Electronics", "Books"]
 
             expect(multi_select_field.type).to eq "Documents::MultiSelectValue"
             expect(multi_select_field.options).to eq({"new" => "New", "sale" => "On Sale", "featured" => "Featured"})
