@@ -1,5 +1,7 @@
 module Documents
   module OptionsConverter
+    extend self
+
     def convert_options options
       options.map { |k, v| {"key" => k.to_s, "value" => v.to_s, "colour" => "#999999", "score" => k.to_s.to_f} }
     end
