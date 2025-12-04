@@ -20,7 +20,7 @@ module Documents
     optional(:allow_tasks).filled(:bool)
     optional(:default_value).maybe(:string)
     optional(:display_style).filled(:string)
-    optional(:options).filled(:hash)
+    optional(:options).maybe(:hash)
     optional(:option_values).array(OptionsValue)
     optional(:data_class).filled(:string)
     optional(:configuration).maybe(:hash)
