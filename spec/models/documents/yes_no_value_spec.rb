@@ -194,7 +194,7 @@ module Documents
     end
 
     describe "scoring" do
-      it "has a score of 1 for yes" do
+      it "has a default score of 1 for yes" do
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
@@ -203,7 +203,7 @@ module Documents
         expect(@field.score).to eq 1.0
       end
 
-      it "has a score of 0 for no" do
+      it "has a default score of 0 for no" do
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
@@ -212,13 +212,28 @@ module Documents
         expect(@field.score).to eq 0.0
       end
 
-      it "has a score of 0 for n/a" do
+      it "has a default score of 0 for n/a" do
         @container = OrderForm.create!
         @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
         @section = @form.sections.first
         @field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {invert_colours: true, allows_na: true}, value: "na"
 
         expect(@field.score).to eq 0.0
+      end
+
+      it "overrides the default scores" do
+        @container = OrderForm.create!
+        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+        @section = @form.sections.first
+        @field = @section.field_values.create! type: "Documents::YesNoValue", name: "terms_accepted", description: "Terms Accepted", required: true, configuration: {invert_colours: true, allows_na: true, scores: {y: 25.0, n: -25.0, na: 10.0}}, value: "na"
+
+        expect(@field.score).to eq 10.0
+
+        @field.value = "y"
+        expect(@field.score).to eq 25.0
+
+        @field.value = "n"
+        expect(@field.score).to eq(-25.0)
       end
     end
   end
