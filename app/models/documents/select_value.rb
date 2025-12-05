@@ -17,6 +17,7 @@ module Documents
     def options_for_select = option_values.map { |v| [v.dig("value"), v.dig("key")] }
     def score = score_from(option_values, key: value)
     def colour = colour_from(option_values, key: value)
+    def option_value = items_from(option_values, key: value)
 
     private def convert_options_to_values
       self.option_values = convert_options(options)
