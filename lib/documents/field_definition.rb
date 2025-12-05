@@ -8,6 +8,7 @@ module Documents
     required(:value).filled(:string)
     optional(:colour).filled(:string).value(format?: /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
     optional(:score).filled(:float)
+    optional(:configuration).maybe(:hash)
   end
 
   FieldDefinitionSchema = Dry::Schema.Params do
