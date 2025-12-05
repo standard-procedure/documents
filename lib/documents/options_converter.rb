@@ -19,7 +19,7 @@ module Documents
     end
 
     def item_from items, key:
-      items.find { |item| item["key"] == key.to_s }
+      items.find { |item| item["key"] == key.to_s } || {}
     end
 
     def value_from items, key:
