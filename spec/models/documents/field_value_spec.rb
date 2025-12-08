@@ -57,6 +57,36 @@ module Documents
 
         expect(@field_value.configuration["some"]).to eq "options"
       end
+
+      it "copies option_values from the configuration if no option_values are supplied" do
+        @container = OrderForm.create!
+        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+        @section = @form.sections.first
+
+        @field_value = @section.field_values.create! type: "Documents::SelectValue", name: "first_name", description: "First Name", configuration: {option_values: [{key: "first", value: "First", colour: "#999999", score: 0}]}
+        @field_value.reload
+
+        expect(@field_value.option_values.size).to eq 1
+        expect(@field_value.option_values.first["key"]).to eq "first"
+        expect(@field_value.option_values.first["value"]).to eq "First"
+        expect(@field_value.option_values.first["colour"]).to eq "#999999"
+        expect(@field_value.option_values.first["score"]).to eq 0.0
+      end
+
+      it "does not overwrite existing option values" do
+        @container = OrderForm.create!
+        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+        @section = @form.sections.first
+
+        @field_value = @section.field_values.create! type: "Documents::SelectValue", name: "first_name", description: "First Name", configuration: {option_values: [{key: "other", value: "Other", colour: "#ffffff", score: 100.0}]}, option_values: [{key: "first", value: "First", colour: "#999999", score: 0}]
+        @field_value.reload
+
+        expect(@field_value.option_values.size).to eq 1
+        expect(@field_value.option_values.first["key"]).to eq "first"
+        expect(@field_value.option_values.first["value"]).to eq "First"
+        expect(@field_value.option_values.first["colour"]).to eq "#999999"
+        expect(@field_value.option_values.first["score"]).to eq 0.0
+      end
     end
   end
 end

@@ -17,7 +17,8 @@ module Documents
     has_attribute :display_style, :string
     has_attribute :options, :json, default: {}
     has_attribute :option_values, :json, default: []
-    has_attribute :configuration, :json
+    has_attribute :configuration, :json, default: {}
+    before_save :copy_option_values, if: -> { option_values.empty? && configuration["option_values"].present? }
     has_many_attached :files do |file|
       ImageDefaults.for file
     end
@@ -37,5 +38,9 @@ module Documents
     def allow_extras? = allow_attachments? || allow_comments? || allow_tasks?
 
     def has_extras? = allow_extras? && (!comments.to_plain_text.blank? || files.attachments.any?)
+
+    def copy_option_values
+      self.option_values = configuration.delete("option_values")
+    end
   end
 end

@@ -30,6 +30,25 @@ elements:
         field_type: Documents::NumberValue
         required: true
         default_value: "1"
+      - name: urgency
+        description: Urgency 
+        field_type: Documents::SelectValue 
+        required: false 
+        default_value: "whenever"
+        configuration:
+          option_values:
+            - key: whenever 
+              value: Whenever 
+              colour: "#aaaaaa"
+              score: 0 
+            - key: soon 
+              value: Soon 
+              colour: "#aaaa00"
+              score: 20 
+            - key: now 
+              value: ASAP 
+              colour: "#aa0000"
+              score: 50
   - element: form
     section_type: static
     display_type: form

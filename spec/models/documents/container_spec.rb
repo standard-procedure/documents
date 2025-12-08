@@ -39,6 +39,12 @@ module Documents
       @section = @form.sections.first
       expect(@section.field_values.first).to be_kind_of(Documents::TextValue)
       expect(@section.field_values.second).to be_kind_of(Documents::NumberValue)
+      expect(@section.field_values.third).to be_kind_of(Documents::SelectValue)
+      select_value = @section.field_values.third
+      expect(select_value.option_values.size).to eq 3
+      expect(select_value.option_values.first["key"]).to eq "whenever"
+      expect(select_value.option_values.second["key"]).to eq "soon"
+      expect(select_value.option_values.third["key"]).to eq "now"
 
       @form = @order_form.elements[4]
       expect(@form).to be_section_type_static
@@ -76,7 +82,7 @@ module Documents
       @order_form.load_elements_from(@configuration)
 
       expect(@order_form.forms.size).to eq 3
-      expect(@order_form.field_values.size).to eq 7
+      expect(@order_form.field_values.size).to eq 8
     end
 
     it "fails if given an invalid configuration" do
