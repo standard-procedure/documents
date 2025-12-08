@@ -62,6 +62,19 @@ module Documents
 
         expect(field.errors[:values]).to be_empty
       end
+
+      it "strips out blank values" do
+        container = OrderForm.create!
+        form = container.elements.create!(type: "Documents::Form", description: "Test Form")
+        section = form.sections.first
+        field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Urgent", "fragile" => "Fragile"})
+
+        field.values = ["", "urgent"]
+        field.valid?(:update)
+
+        expect(field.errors[:values]).to be_empty
+        expect(field.values).to eq ["urgent"]
+      end
     end
 
     describe "default values" do
