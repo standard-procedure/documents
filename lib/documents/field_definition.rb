@@ -30,9 +30,14 @@ module Documents
   class FieldDefinition < Dry::Validation::Contract
     params(FieldDefinitionSchema)
 
-    rule(:options) do
-      key.failure(:blank) if %w[Documents::SelectValue Documents::MultiSelectValue].include?(values[:field_type]) && values[:options].empty?
+    rule(:option_values) do
+      key.failure(:blank) if %w[Documents::SelectValue].include?(values[:field_type]) && values[:option_values].empty?
     end
+
+    rule(:options) do
+      key.failure(:blank) if %w[Documents::MultiSelectValue].include?(values[:field_type]) && values[:options].empty?
+    end
+
     rule(:display_style) do
       key.failure(:invalid) if %w[Documents::SelectValue].include?(values[:field_type]) && !values[:display_style].empty? && !%w[select buttons].include?(values[:display_style])
     end
