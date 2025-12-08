@@ -75,6 +75,19 @@ module Documents
         expect(field.errors[:values]).to be_empty
         expect(field.values).to eq ["urgent"]
       end
+
+      it "returns a list of labels for display" do
+        container = OrderForm.create!
+        form = container.elements.create!(type: "Documents::Form", description: "Test Form")
+        section = form.sections.first
+        field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Rush Order", "fragile" => "Handle with Care", "heavy" => "Heavy Item"})
+
+        field.values = ["urgent", "fragile"]
+
+        expect(field.labels.size).to eq 2
+        expect(field.labels).to include "Rush Order"
+        expect(field.labels).to include "Handle with Care"
+      end
     end
 
     describe "default values" do

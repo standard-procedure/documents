@@ -7,7 +7,9 @@ module Documents
     validate :all_values_are_valid_options, if: -> { values.present? && options.any? }
     validate :default_value_contains_valid_options, if: -> { default_value.present? && options.any? }
 
-    def to_s = Array.wrap(values).map { |key| options[key] || key }.join(", ")
+    def labels = Array.wrap(values).map { |key| options[key] || key }
+
+    def to_s = labels.join(", ")
 
     private def set_default_value
       self.values = Array.wrap(parse_default_value)
