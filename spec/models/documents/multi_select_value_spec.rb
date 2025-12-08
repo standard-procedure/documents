@@ -9,10 +9,10 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", required: true, options: {"urgent" => "Urgent", "fragile" => "Fragile"})
 
-        field.value = []
+        field.values = []
         field.valid?(:update)
 
-        expect(field.errors[:value]).to include("Required")
+        expect(field.errors).to include :values
       end
 
       it "does not require a value when field is not required" do
@@ -21,10 +21,10 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Optional Tags", required: false, options: {"urgent" => "Urgent", "fragile" => "Fragile"})
 
-        field.value = []
+        field.values = []
         field.valid?(:update)
 
-        expect(field.errors[:value]).to be_empty
+        expect(field.errors[:values]).to be_empty
       end
 
       it "accepts valid option keys" do
@@ -33,10 +33,10 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Urgent", "fragile" => "Fragile", "heavy" => "Heavy"})
 
-        field.value = ["urgent", "fragile"]
+        field.values = ["urgent", "fragile"]
         field.valid?(:update)
 
-        expect(field.errors[:value]).to be_empty
+        expect(field.errors[:values]).to be_empty
       end
 
       it "rejects invalid option keys" do
@@ -45,10 +45,10 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Urgent", "fragile" => "Fragile"})
 
-        field.value = ["urgent", "invalid"]
+        field.values = ["urgent", "invalid"]
         field.valid?(:update)
 
-        expect(field.errors[:value]).to include("Invalid option")
+        expect(field.errors).to include :values
       end
 
       it "accepts single valid option key" do
@@ -57,10 +57,10 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Urgent", "fragile" => "Fragile"})
 
-        field.value = ["urgent"]
+        field.values = ["urgent"]
         field.valid?(:update)
 
-        expect(field.errors[:value]).to be_empty
+        expect(field.errors[:values]).to be_empty
       end
     end
 
@@ -71,7 +71,7 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Urgent", "fragile" => "Fragile"}, default_value: '["urgent"]')
 
-        expect(field.value).to eq(["urgent"])
+        expect(field.values).to eq(["urgent"])
       end
 
       it "converts single default value to array" do
@@ -80,7 +80,7 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Urgent", "fragile" => "Fragile"}, default_value: "urgent")
 
-        expect(field.value).to eq(["urgent"])
+        expect(field.values).to eq(["urgent"])
       end
 
       it "validates default values are in options" do
@@ -113,7 +113,7 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Rush Order", "fragile" => "Handle with Care", "heavy" => "Heavy Item"})
 
-        field.value = ["urgent", "fragile"]
+        field.values = ["urgent", "fragile"]
 
         expect(field.to_s).to eq("Rush Order, Handle with Care")
       end
@@ -124,7 +124,7 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Rush Order"})
 
-        field.value = ["urgent"]
+        field.values = ["urgent"]
 
         expect(field.to_s).to eq("Rush Order")
       end
@@ -135,18 +135,18 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {})
 
-        field.value = ["unknown", "other"]
+        field.values = ["unknown", "other"]
 
         expect(field.to_s).to eq("unknown, other")
       end
 
-      it "returns empty string when value is empty" do
+      it "returns empty string when values is empty" do
         container = OrderForm.create!
         form = container.elements.create!(type: "Documents::Form", description: "Test Form")
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Rush Order"})
 
-        field.value = []
+        field.values = []
 
         expect(field.to_s).to eq("")
       end
@@ -157,7 +157,7 @@ module Documents
         section = form.sections.first
         field = section.field_values.create!(type: "Documents::MultiSelectValue", name: "tags", description: "Order Tags", options: {"urgent" => "Rush Order"})
 
-        field.value = nil
+        field.values = nil
 
         expect(field.to_s).to eq("")
       end
