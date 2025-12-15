@@ -52,12 +52,15 @@ module Documents
 
       @pdf = @order_form.elements[5]
       expect(@pdf.url).to eq "https://example.com/pdf"
+      expect(@pdf.filename).to eq "document.pdf"
 
       @image = @order_form.elements[6]
       expect(@image.url).to eq "https://example.com/image"
+      expect(@image.filename).to eq "image.jpg"
 
       @download = @order_form.elements[7]
       expect(@download.url).to eq "https://example.com/download"
+      expect(@download.filename).to eq "document.pdf"
 
       @video = @order_form.elements[8]
       expect(@video.url).to eq "https://example.com/video"

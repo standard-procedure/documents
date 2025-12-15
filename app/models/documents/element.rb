@@ -10,9 +10,9 @@ module Documents
     has_one_attached :file do |file|
       ImageDefaults.for file
     end
-    attribute :description, :string, default: ""
-    attribute :url, :string, default: ""
-    attribute :filename, :string, default: ""
+    has_attribute :description, :string, default: ""
+    has_attribute :url, :string, default: ""
+    has_attribute :filename, :string, default: ""
 
     def copy_to(target_container, copy_as_template: false) = nil
 
