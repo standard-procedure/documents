@@ -70,13 +70,13 @@ elements:
         field_type: Documents::SignatureValue
         required: true
   - element: pdf
-    url: http://example.com/pdf
+    url: https://example.com/pdf
     filename: document.pdf
   - element: image
-    url: http://example.com/image
+    url: https://example.com/image
     filename: image.jpg
   - element: download
-    url: http://example.com/download
+    url: https://example.com/download
     filename: document.pdf
   - element: video
-    url: http://example.com/video
+    url: https://example.com/video

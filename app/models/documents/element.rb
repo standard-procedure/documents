@@ -13,7 +13,6 @@ module Documents
     attribute :description, :string, default: ""
     attribute :url, :string, default: ""
     attribute :filename, :string, default: ""
-    after_save :attach_file, if: -> { !file.attached? && url.present? }
 
     def copy_to(target_container, copy_as_template: false) = nil
 
@@ -21,15 +20,6 @@ module Documents
 
     private def container_is_legal
       errors.add :container, :invalid unless container.is_a? Documents::Container
-    end
-
-    private def attach_file
-      Tempfile.create do |download|
-        download.binmode
-        download.write Net::HTTP.get(URI(url))
-        download.close
-        file.attach io: File.open(download.path), filename: filename.to_s
-      end
     end
   end
 end

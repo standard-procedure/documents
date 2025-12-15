@@ -2,13 +2,6 @@ require "rails_helper"
 
 module Documents
   RSpec.describe Container do
-    before do
-      # Mock out HTTP calls
-      allow(Net::HTTP).to receive(:get).with(URI("http://example.com/pdf")).and_return(File.open(File.join("spec", "fixtures", "files", "document.pdf")))
-      allow(Net::HTTP).to receive(:get).with(URI("http://example.com/image")).and_return(File.open(Rails.root.join("spec", "fixtures", "files", "bubble.jpg")))
-      allow(Net::HTTP).to receive(:get).with(URI("http://example.com/download")).and_return(File.open(File.join("spec", "fixtures", "files", "document.pdf")))
-    end
-
     it "builds a document from a valid configuration" do
       @configuration = YAML.load_file(Rails.root.join("spec", "fixtures", "files", "order_form.yml"))
       @order_form = OrderForm.create!
@@ -58,20 +51,16 @@ module Documents
       expect(@yes_no_value.invert_colours?).to be true
 
       @pdf = @order_form.elements[5]
-      expect(@pdf.file).to be_attached
-      expect(@pdf.file.filename.to_s).to eq "document.pdf"
+      expect(@pdf.url).to eq "https://example.com/pdf"
 
       @image = @order_form.elements[6]
-      expect(@image.file).to be_attached
-      expect(@image.file.filename.to_s).to eq "image.jpg"
+      expect(@image.url).to eq "https://example.com/image"
 
       @download = @order_form.elements[7]
-      expect(@download.file).to be_attached
-      expect(@download.file.filename.to_s).to eq "document.pdf"
+      expect(@download.url).to eq "https://example.com/download"
 
       @video = @order_form.elements[8]
-      expect(@video.url).to eq "http://example.com/video"
-      expect(@video.file).not_to be_attached
+      expect(@video.url).to eq "https://example.com/video"
     end
 
     it "knows which forms and field values it contains" do
