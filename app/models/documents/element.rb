@@ -3,7 +3,7 @@ module Documents
     include HasAttributes
 
     serialize :data, type: Hash, coder: JSON
-    belongs_to :container, polymorphic: true
+    belongs_to :container, polymorphic: true, touch: true
     validate :container_is_legal
     positioned on: :container
     has_rich_text :contents

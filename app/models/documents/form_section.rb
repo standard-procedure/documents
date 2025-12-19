@@ -2,7 +2,7 @@ module Documents
   class FormSection < ApplicationRecord
     include FormSectionExtensions
 
-    belongs_to :form, inverse_of: :sections
+    belongs_to :form, inverse_of: :sections, touch: true
     delegate :container, to: :form
     positioned on: :form
     has_many :field_values, -> { order :position }, inverse_of: :section, dependent: :destroy

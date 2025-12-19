@@ -9,7 +9,7 @@ module Documents
     validates :name, presence: true
     validates :description, presence: true
     serialize :data, type: Hash, coder: JSON
-    belongs_to :section, class_name: "FormSection"
+    belongs_to :section, class_name: "FormSection", touch: true
     delegate :form, to: :section
     delegate :container, to: :form
     positioned on: :section
