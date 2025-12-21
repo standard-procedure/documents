@@ -2,6 +2,8 @@ require "rails_helper"
 
 module Documents
   RSpec.describe DateValue, type: :model do
+    include ActiveSupport::Testing::TimeHelpers
+
     describe "validations" do
       it "requires a value when the field is required" do
         @container = OrderForm.create!
@@ -59,24 +61,26 @@ module Documents
       end
 
       it "parses the default value to find the date" do
-        @container = OrderForm.create!
-        @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
-        @section = @form.sections.first
+        travel_to Date.current.monday do
+          @container = OrderForm.create!
+          @form = @container.elements.create! type: "Documents::Form", description: "Test Form"
+          @section = @form.sections.first
 
-        @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "today"
-        expect(@date_field.value).to eq Date.current
-        @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "yesterday"
-        expect(@date_field.value).to eq Date.current - 1
-        @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "tomorrow"
-        expect(@date_field.value).to eq Date.current + 1
-        @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "25th November 1998"
-        expect(@date_field.value).to eq Date.new(1998, 11, 25)
-        @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "7 days from now"
-        expect(@date_field.value).to eq Date.current + 7
-        @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "90 days ago"
-        expect(@date_field.value).to eq Date.current - 90
-        @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "tuesday next week"
-        expect(@date_field.value).to eq Date.current.next_week(:tuesday)
+          @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "today"
+          expect(@date_field.value).to eq Date.current
+          @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "yesterday"
+          expect(@date_field.value).to eq Date.current - 1
+          @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "tomorrow"
+          expect(@date_field.value).to eq Date.current + 1
+          @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "25th November 1998"
+          expect(@date_field.value).to eq Date.new(1998, 11, 25)
+          @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "7 days from now"
+          expect(@date_field.value).to eq Date.current + 7
+          @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "90 days ago"
+          expect(@date_field.value).to eq Date.current - 90
+          @date_field = @section.field_values.create! type: "Documents::DateValue", name: "order_date", description: "Order Date", default_value: "tuesday next week"
+          expect(@date_field.value).to eq Date.current.next_week(:tuesday)
+        end
       end
     end
   end
