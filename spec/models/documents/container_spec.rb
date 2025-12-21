@@ -103,5 +103,15 @@ module Documents
 
       expect(@order_form.invalid_field_values).to include @field_value
     end
+
+    it "can eager load the elements, including forms and their values" do
+      @configuration = YAML.load_file(Rails.root.join("spec", "fixtures", "files", "order_form.yml"))
+      @order_form = OrderForm.create!
+      @order_form.load_elements_from(@configuration)
+
+      @eager_loaded_form = OrderForm.eager_load(elements: {sections: :field_values}).find @order_form.id
+
+      expect(@eager_loaded_form.elements.size).to eq 9
+    end
   end
 end

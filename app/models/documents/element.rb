@@ -13,6 +13,7 @@ module Documents
     has_attribute :description, :string, default: ""
     has_attribute :url, :string, default: ""
     has_attribute :filename, :string, default: ""
+    has_many :sections, -> { order :position }, class_name: "FormSection", foreign_key: "form_id", dependent: :destroy
 
     def copy_to(target_container, copy_as_template: false) = nil
 
