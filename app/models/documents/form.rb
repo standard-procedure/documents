@@ -21,6 +21,9 @@ module Documents
 
     def field_values = sections.collect(&:field_values).flatten
 
+    def field_names = sections.first.field_values.order(:position).map(&:name)
+    def field_descriptions = sections.first.field_values.order(:position).map(&:description)
+
     private def create_first_section = sections.create!
   end
 end

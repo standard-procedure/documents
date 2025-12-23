@@ -47,6 +47,43 @@ module Documents
         expect(@form.field_templates).to eq configuration["elements"][0]["fields"]
         expect(@form.sections.first.field_values.count).to eq 2
       end
+
+      it "knows its field names and descriptions" do
+        @container = OrderForm.create!
+
+        configuration = {
+          "title" => "Order Form",
+          "elements" => [
+            {
+              "element" => "form",
+              "section_type" => "repeating",
+              "display_type" => "form",
+              "description" => "Order Items",
+              "fields" => [
+                {
+                  "name" => "item",
+                  "description" => "Item Name",
+                  "field_type" => "Documents::TextValue",
+                  "required" => true
+                },
+                {
+                  "name" => "quantity",
+                  "description" => "Quantity",
+                  "field_type" => "Documents::NumberValue",
+                  "required" => true,
+                  "default_value" => "1"
+                }
+              ]
+            }
+          ]
+        }
+
+        @container.load_elements_from(configuration)
+        @form = @container.elements.where(type: "Documents::Form").first
+
+        expect(@form.field_names).to eq ["item", "quantity"]
+        expect(@form.field_descriptions).to eq ["Item Name", "Quantity"]
+      end
     end
 
     describe "section management" do
