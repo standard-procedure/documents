@@ -2,7 +2,7 @@ module Documents::Container
   extend ActiveSupport::Concern
 
   included do
-    has_many :elements, -> { order :position }, class_name: "Documents::Element", as: :container, dependent: :destroy
+    has_many :elements, -> { includes(:rich_text_contents, :file_attachment, sections: [field_values: [:rich_text_comments, :files_attachments, :attachments_attachments]]).order :position }, class_name: "Documents::Element", as: :container, dependent: :destroy
     validates_associated :elements, on: :update
   end
 
